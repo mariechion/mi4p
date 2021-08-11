@@ -1,0 +1,43 @@
+#Not for the package
+^LICENSE$
+^Arabidopsis_UPS.*$
+^Functions.*$
+^MV25pct.*$
+^Simulation-1.*$
+^Simulation-2.*$
+^Simulation-3.*$
+^Yeast_UPS.*$
+
+genlogo.R
+.gitignore
+^codecov\.yml$
+^revdep$
+^_pkgdown\.yml$
+^figure$
+^pkgdown$
+^Meta$
+^doc$
+#All packages
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.gitignore$
+^NEWS$
+#For the pkgdown website
+^docs*$
+#For the cached chunks of README.Rmd
+^cache*$
+^README_cache*$
+#If README too big, not on CRAN but only on git
+#^man/figures*$
+^README\.Rmd$
+#^README\.md$
+#Specific
+^articles.*$
+#Vignette cache
+^cran-comments[.].*$
+^vignettes/.*[.](pdf|PDF)$
+^vignettes/.*[.](r|R)$
+^vignettes/[.]install_extras$
+^vignettes/.*_cache$
+^vignettes/.*_files$
+^\.github$

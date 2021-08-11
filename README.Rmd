@@ -1,7 +1,16 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
-
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  dpi=300,fig.width=7,
+  fig.keep="all"
+)
+```
 
 # mi4p <img src="man/figures/logo.png" align="right" width="200"/>
 
@@ -35,15 +44,13 @@ This website and these examples were created by M. Chion, C. Carapito and F. Ber
 
 You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
 
-
-```r
+```{r, eval = FALSE}
 install.packages("mi4p")
 ```
 
 You can install the development version of mi4p from [github](https://github.com) with:
 
-
-```r
+```{r, eval = FALSE}
 devtools::install_github("mariechion/mi4p")
 ```
 
@@ -51,8 +58,7 @@ devtools::install_github("mariechion/mi4p")
 
 ### First section
 
-
-```r
+```{r}
 library(mi4p)
 ```
 

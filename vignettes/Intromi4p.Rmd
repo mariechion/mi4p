@@ -1,0 +1,79 @@
+---
+title: "Multiple imputation for proteomics"
+shorttitle: "mi4p: multiple imputation for proteomics"
+author: 
+- Marie Chion, Université de Strasbourg et CNRS, IRMA, labex IRMIA, LSMBO, IPHC, marie.chion@protonmail.fr
+- Christine Carapito, Université de Strasbourg et CNRS, LSMBO, IPHC, ccarapito@unistra.fr
+- Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, frederic.bertrand@utt.fr
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+vignette: >
+  %\VignetteIndexEntry{Multiple imputation for proteomics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<table align="center">
+        <tr>
+            <td><img src="../man/figures/logo.png" align="center" width="200" style="margin:0 0 0 100px;"/></td>
+        </tr>
+</table>
+
+```{r setup, include = FALSE}
+LOCAL <- identical(Sys.getenv("LOCAL"), "TRUE")
+#LOCAL=FALSE
+knitr::opts_chunk$set(purl = LOCAL)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width=5
+)
+```
+
+# mi4p: multiple imputation for proteomics
+
+This vignette is an introduciton to the `mi4p` R package (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand. The package is dedicated to dealing with multiple imputation for proteomics.
+
+The following material is available on thr Github repository of the package (https://github.com/mariechion/mi4p/).
+
+1. The `Functions` folder contains all the functions used for the workflow.  
+
+2. The `Simulation-1`, `Simulation-2` and `Simulation-3` folders contain all the R scripts and data used to conduct simulated experiments and evaluate our methodology. 
+
+3. The  `Arabidopsis_UPS` and `Yeast_UPS` folders contain all the R scripts and data used to challenge our methodology on real proteomics datasets. Raw experimental data were deposited with the ProteomeXchange Consortium via the PRIDE partner repository with the dataset identifiers PXD003841 and PXD027800.
+
+<!--You can insert a graphic here, just modify that syntax  ![Example Graphs.](IntroPatterns_files/figure-html/Fresults-1.png) -->
+
+
+This website and these examples were created by M. Chion, C. Carapito and F. Bertrand.
+
+## Installation
+
+You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
+
+```{r, eval = FALSE}
+install.packages("mi4p")
+```
+
+You can install the development version of mi4p from [github](https://github.com) with:
+
+```{r, eval = FALSE}
+devtools::install_github("mariechion/mi4p")
+```
+
+## Examples
+
+### First section
+
+```{r}
+library(mi4p)
+```
+
+Use `eval=LOCAL` to prevent testing too long computation during CRAN checks.
+```{r, cache=TRUE, eval = LOCAL}
+1L+1L==2L
+```
+

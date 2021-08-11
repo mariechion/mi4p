@@ -1,0 +1,36 @@
+Package: mi4p
+Type: Package
+Title: Multiple Imputation for Proteomics
+Version: 0.5
+Date: 2021-08-11
+Depends: R (>= 3.5.0)
+biocViews:
+Imports: 
+    DAPAR,
+    emmeans,
+    foreach,
+    imp4p,
+    impute,
+    limma,
+    mice,
+    stringr
+Suggests: 
+    Biobase, 
+    knitr,
+    R.rsp,
+    rmarkdown
+Authors@R: c(
+	person(given = "Marie", family= "Chion", role = c("aut"), email = "mariechion@protonmail.com", comment = c(ORCID = "0000-0001-8956-8388")),
+	person(given = "Christine", family= "Carapito", role = c("aut"), email = "ccarapito@unistra.fr", comment = c(ORCID = "0000-0002-0079-319X")),
+	person(given = "Frederic", family= "Bertrand", role = c("cre", "aut"), email = "frederic.bertrand@utt.fr", comment = c(ORCID = "0000-0002-0837-8281"))
+	)
+Author: Marie Chion [aut] (<https://orcid.org/0000-0001-8956-8388>), Christine Carapito [aut] (<https://orcid.org/0000-0002-0079-319X>), Frederic Bertrand [cre, aut] (<https://orcid.org/0000-0002-0837-8281>)
+Maintainer: Frederic Bertrand <frederic.bertrand@utt.fr>
+Description: A framework for multiple imputation for proteomics is proposed by Marie Chion, Christine Carapito and Frédéric Bertrand <arxiv:>. It is dedicated to dealing with multiple imputation for proteomics.
+License: GPL (>= 2)
+Encoding: UTF-8
+Classification/MSC: 62J05, 62J07, 62J99, 92C42
+VignetteBuilder: knitr
+RoxygenNote: 7.1.1
+URL: https://mariechion.github.io/mi4p/, https://github.com/mariechion/mi4p/
+BugReports: https://github.com/mariechion/mi4p/issues/

@@ -1,0 +1,31 @@
+citHeader("To cite the mi4p package in publications use:")
+
+titl <- meta$Title
+titl <- "mi4p: multiple imputation for proteomics"
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+auth <- personList(as.person("Marie Chion"), as.person("Christine Carapito"), as.person("Frederic Bertrand"))
+
+citEntry(entry="Manual",
+         title = titl,
+         author = personList(as.person("Marie Chion"), as.person("Christine Carapito"), as.person("Frederic Bertrand")),
+	 publisher = "manual",
+         year         = year,
+         note         = vers,
+         url          = "",
+         textVersion = 
+         paste("M. Chion, Ch. Carapito and F. Bertrand (",year ,"). ", 
+               titl, ", ", vers, ".", sep=""
+               )
+)
+
+citEntry(entry = "Article",
+         title = titl,
+         author = auth,
+         year = 2021,
+journal="arxiv",
+url="arxiv",
+         textVersion =
+         paste0("M. Chion, Ch. Carapito and F. Bertrand (2021). Accounting for multiple imputation-induced variability for
+differential analysis in mass spectrometry-based label-free
+quantitative proteomics. arxiv."))

@@ -1,6 +1,17 @@
 # Modified version of limmaCompleteTest function from DAPAR package
 # to return fit and res.
 
+#' Title
+#'
+#' @param qData 
+#' @param sTab 
+#' @param comp.type 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' 1+1
 limmaCompleteTest.mod <- function (qData, sTab, comp.type = "OnevsOne") 
 {
   switch(comp.type, OnevsOne = contrast <- 1, OnevsAll = contrast <- 2)
@@ -23,7 +34,7 @@ limmaCompleteTest.mod <- function (qData, sTab, comp.type = "OnevsOne")
     cmtx <- limma::makeContrasts(contrasts = contra, levels = make.names(colnames(design.matrix)))
     fit <- limma::eBayes(limma::contrasts.fit(limma::lmFit(qData, 
                                                            design.matrix), cmtx))
-    res.l <- DAPAR:::formatLimmaResult(fit, conds, contrast)
+    res.l <- mi4p::formatLimmaResult(fit, conds, contrast)
   }
   return(list(res.l = res.l, fit.s2 = fit$s2.post))
 }
