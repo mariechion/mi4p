@@ -24,7 +24,6 @@ citEntry(entry = "Article",
          author = auth,
          year = 2021,
 journal="arxiv",
-url="arxiv",
          textVersion =
          paste0("M. Chion, Ch. Carapito and F. Bertrand (2021). Accounting for multiple imputation-induced variability for
 differential analysis in mass spectrometry-based label-free
