@@ -2,25 +2,38 @@
 % Please edit documentation in R/rubin1_all.R
 \name{rubin1.all}
 \alias{rubin1.all}
-\title{Title}
+\title{First Rubin rule (all peptide)}
 \usage{
-rubin1.all(data, metacond, funcmean = meanImp_emmeans, is.parallel = FALSE)
+rubin1.all(
+  data,
+  metacond,
+  funcmean = meanImp_emmeans,
+  is.parallel = FALSE,
+  verbose = FALSE
+)
 }
 \arguments{
-\item{data}{}
+\item{data}{dataset}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 
-\item{funcmean}{}
+\item{funcmean}{function that should be used to compute the mean}
 
-\item{is.parallel}{}
+\item{is.parallel}{should parallel computing be used?}
+
+\item{verbose}{should messages be displayed?}
 }
 \value{
-
+A vector of estimated parameters.
 }
 \description{
-Title
+Computes the first Rubin's rule for all the peptide.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin1.all(datasim_imp[1:5,,],funcmean = meanImp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

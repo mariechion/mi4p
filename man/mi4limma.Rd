@@ -4,25 +4,31 @@
 \alias{mi4limma}
 \title{Title}
 \usage{
-mi4limma(qData, sTab, VarRubin, comp.type = "OnevsOne", robust = F)
+mi4limma(qData, sTab, VarRubin, comp.type = "OnevsOne", robust = FALSE)
 }
 \arguments{
-\item{qData}{}
+\item{qData}{A matrix of quantitative data, without any missing values.}
 
-\item{sTab}{}
+\item{sTab}{The data.frame which correspond to the pData function of MSnbase}
 
-\item{VarRubin}{}
+\item{VarRubin}{A variance-covariance matrix}
 
-\item{comp.type}{}
+\item{comp.type}{A string that corresponds to the type of comparison. Values are: 'anova1way', 'OnevsOne' and 'OnevsAll'; default is 'OnevsOne'.}
 
-\item{robust}{}
+\item{robust}{logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances? (as in limma's eBayes)}
 }
 \value{
-
+A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
 }
 \description{
 Title
 }
 \examples{
-1+1
+#' library(DAPAR)
+set.seed(2016)
+utils::data(Exp1_R25_pept, package='DAPARdata')
+obj <- Exp1_R25_pept
+qData <- Biobase::exprs(obj)
+sTab <- Biobase::pData(obj)
+fit.limma <- mi4limma(qData, sTab, diag(1,2))
 }

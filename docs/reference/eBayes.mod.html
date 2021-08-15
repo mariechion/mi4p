@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — eBayes.mod • mi4p</title>
+<title>MI-aware Modifed eBayes Function — eBayes.mod • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Title — eBayes.mod" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="MI-aware Modifed eBayes Function — eBayes.mod" />
+<meta property="og:description" content="Modified eBayes function to be used instead of the one in the limma package" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,13 +131,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>MI-aware Modifed eBayes Function</h1>
     <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/eBayes_mod.R'><code>R/eBayes_mod.R</code></a></small>
     <div class="hidden name"><code>eBayes.mod.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Modified eBayes function to be used instead of the one in the limma package</p>
     </div>
 
     <pre class="usage"><span class='fu'>eBayes.mod</span><span class='op'>(</span>
@@ -155,43 +155,213 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td></td>
+      <td><p>an MArrayLM fitted model object produced by lmFit or contrasts.fit. For ebayes only, fit can alternatively be an unclassed list produced by lm.series, gls.series or mrlm containing components coefficients, stdev.unscaled, sigma and df.residual.</p></td>
     </tr>
     <tr>
       <th>VarRubin</th>
-      <td></td>
+      <td><p>a variance-covariance matrix.</p></td>
     </tr>
     <tr>
       <th>proportion</th>
-      <td></td>
+      <td><p>numeric value between 0 and 1, assumed proportion of genes which are differentially expressed</p></td>
     </tr>
     <tr>
       <th>stdev.coef.lim</th>
-      <td></td>
+      <td><p>numeric vector of length 2, assumed lower and upper limits for the standard deviation of log2-fold-changes for differentially expressed genes</p></td>
     </tr>
     <tr>
       <th>trend</th>
-      <td></td>
+      <td><p>logical, should an intensity-trend be allowed for the prior variance? Default is that the prior variance is constant.</p></td>
     </tr>
     <tr>
       <th>robust</th>
-      <td></td>
+      <td><p>logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances?</p></td>
     </tr>
     <tr>
       <th>winsor.tail.p</th>
-      <td></td>
+      <td><p>numeric vector of length 1 or 2, giving left and right tail proportions of x to Winsorize. Used only when robust=TRUE.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>eBayes produces an object of class MArrayLM (see MArrayLM-class) containing everything found in <code>fit</code> plus the following added components:</p><dl>
+<dt>t</dt><dd><p>numeric matrix of moderated t-statistics.</p></dd>
+<dt>p.value</dt><dd><p>numeric matrix of two-sided p-values corresponding to the t-statistics.</p></dd>
+<dt>lods</dt><dd><p>numeric matrix giving the log-odds of differential expression (on the natural log scale).</p></dd>
+<dt>s2.prior</dt><dd><p>estimated prior value for sigma^2. A row-wise vector if covariate is non-NULL, otherwise a single value.</p></dd>
+<dt>df.prior</dt><dd><p>degrees of freedom associated with s2.prior. A row-wise vector if robust=TRUE, otherwise a single value.</p></dd>
+<dt>df.total</dt><dd><p>row-wise numeric vector giving the total degrees of freedom associated with the t-statistics for each gene. Equal to df.prior+df.residual or sum(df.residual), whichever is smaller.</p></dd>
+<dt>s2.post</dt><dd><p>row-wise numeric vector giving the posterior values for sigma^2.</p></dd>
+<dt>var.prior</dt><dd><p>column-wise numeric vector giving estimated prior values for the variance of the log2-fold-changes for differentially expressed gene for each constrast. Used for evaluating lods.</p></dd>
+<dt>F</dt><dd><p>row-wise numeric vector of moderated F-statistics for testing all contrasts defined by the columns of fit simultaneously equal to zero.</p></dd>
+<dt>F.p.value</dt><dd><p>row-wise numeric vector giving p-values corresponding to F.</p></dd>
 
+</dl>
 
+<p>The matrices t, p.value and lods have the same dimensions as the input object fit, with rows corresponding to genes and columns to coefficients or contrasts. The vectors s2.prior, df.prior, df.total, F and F.p.value correspond to rows, with length equal to the number of genes. The vector var.prior corresponds to columns, with length equal to the number of contrasts. If s2.prior or df.prior have length 1, then the same value applies to all genes.</p>
+<p>s2.prior, df.prior and var.prior contain empirical Bayes hyperparameters used to obtain df.total, s2.post and lods.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Modified by M. Chion and F. Bertrand. Original by Gordon Smyth and Davis McCarthy</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>+</span><span class='fl'>1</span>
-</div><div class='output co'>#&gt; [1] 2</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mariechion.github.io/mi4p/'>mi4p</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>datasim</span><span class='op'>)</span>
+<span class='va'>datasim_imp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='multi.impute.html'>multi.impute</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>datasim</span><span class='op'>[</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, conditions <span class='op'>=</span> 
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span>, method <span class='op'>=</span> <span class='st'>"MLE"</span><span class='op'>)</span>
+<span class='va'>VarRubin.matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rubin2.all.html'>rubin2.all</a></span><span class='op'>(</span><span class='va'>datasim_imp</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,,<span class='op'>]</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
+<span class='va'>sigma2</span> <span class='op'>&lt;-</span> <span class='fl'>0.05</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/stats/Chisquare.html'>rchisq</a></span><span class='op'>(</span><span class='fl'>100</span>, df<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>10</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>datasim_imp</span><span class='op'>[</span>,,<span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>design</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>Intercept<span class='op'>=</span><span class='fl'>1</span>,Group<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span>
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>fit.model</span> <span class='op'>&lt;-</span> <span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/lmFit.html'>lmFit</a></span><span class='op'>(</span><span class='va'>y</span>,<span class='va'>design</span><span class='op'>)</span>
+<span class='fu'>eBayes.mod</span><span class='op'>(</span>fit<span class='op'>=</span><span class='va'>fit.model</span>,<span class='va'>VarRubin.matrix</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Zero sample variances detected, have been offset away from zero</span></div><div class='output co'>#&gt; An object of class "MArrayLM"
+#&gt; $coefficients
+#&gt;      Intercept     Group
+#&gt; [1,]  99.02599 101.21269
+#&gt; [2,] 100.18124  99.27197
+#&gt; [3,]  99.62693 100.47686
+#&gt; [4,] 100.09296 100.07284
+#&gt; [5,] 100.56314  99.11801
+#&gt; 195 more rows ...
+#&gt; 
+#&gt; $rank
+#&gt; [1] 2
+#&gt; 
+#&gt; $assign
+#&gt; NULL
+#&gt; 
+#&gt; $qr
+#&gt; $qr
+#&gt;        Intercept      Group
+#&gt;  [1,] -3.1622777 -1.5811388
+#&gt;  [2,]  0.3162278  1.5811388
+#&gt;  [3,]  0.3162278  0.2402531
+#&gt;  [4,]  0.3162278  0.2402531
+#&gt;  [5,]  0.3162278  0.2402531
+#&gt;  [6,]  0.3162278 -0.3922025
+#&gt;  [7,]  0.3162278 -0.3922025
+#&gt;  [8,]  0.3162278 -0.3922025
+#&gt;  [9,]  0.3162278 -0.3922025
+#&gt; [10,]  0.3162278 -0.3922025
+#&gt; 
+#&gt; $qraux
+#&gt; [1] 1.316228 1.240253
+#&gt; 
+#&gt; $pivot
+#&gt; [1] 1 2
+#&gt; 
+#&gt; $tol
+#&gt; [1] 1e-07
+#&gt; 
+#&gt; $rank
+#&gt; [1] 2
+#&gt; 
+#&gt; 
+#&gt; $df.residual
+#&gt; [1] 8 8 8 8 8
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $sigma
+#&gt; [1] 0.9775856 0.7953603 1.1048761 0.8560416 0.8190853
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $cov.coefficients
+#&gt;           Intercept Group
+#&gt; Intercept       0.2  -0.2
+#&gt; Group          -0.2   0.4
+#&gt; 
+#&gt; $stdev.unscaled
+#&gt;      Intercept     Group
+#&gt; [1,] 0.4472136 0.6324555
+#&gt; [2,] 0.4472136 0.6324555
+#&gt; [3,] 0.4472136 0.6324555
+#&gt; [4,] 0.4472136 0.6324555
+#&gt; [5,] 0.4472136 0.6324555
+#&gt; 195 more rows ...
+#&gt; 
+#&gt; $pivot
+#&gt; [1] 1 2
+#&gt; 
+#&gt; $Amean
+#&gt; [1] 149.6323 149.8172 149.8654 150.1294 150.1221
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $method
+#&gt; [1] "ls"
+#&gt; 
+#&gt; $design
+#&gt;       Intercept Group
+#&gt;  [1,]         1     0
+#&gt;  [2,]         1     0
+#&gt;  [3,]         1     0
+#&gt;  [4,]         1     0
+#&gt;  [5,]         1     0
+#&gt;  [6,]         1     1
+#&gt;  [7,]         1     1
+#&gt;  [8,]         1     1
+#&gt;  [9,]         1     1
+#&gt; [10,]         1     1
+#&gt; 
+#&gt; $df.prior
+#&gt; [1] 0.2886034
+#&gt; 
+#&gt; $s2.prior
+#&gt; [1] 4.391122e-07
+#&gt; 
+#&gt; $var.prior
+#&gt; [1] 36437154 36437154
+#&gt; 
+#&gt; $proportion
+#&gt; [1] 0.01
+#&gt; 
+#&gt; $s2.post
+#&gt; [1] 3.526045e-02 1.528958e-08 1.528958e-08 3.526045e-02           NA
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $t
+#&gt;        Intercept        Group
+#&gt; [1,]    1179.208     852.2383
+#&gt; [2,] 1811647.135 1269400.9619
+#&gt; [3,] 1801623.098 1284808.0990
+#&gt; [4,]    1191.913     842.6404
+#&gt; [5,]          NA           NA
+#&gt; 195 more rows ...
+#&gt; 
+#&gt; $df.total
+#&gt; [1] 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $p.value
+#&gt;         Intercept        Group
+#&gt; [1,] 5.982632e-23 8.827114e-22
+#&gt; [2,] 2.319558e-49 4.423698e-48
+#&gt; [3,] 2.428723e-49 4.002744e-48
+#&gt; [4,] 5.474126e-23 9.695892e-22
+#&gt; [5,]           NA           NA
+#&gt; 195 more rows ...
+#&gt; 
+#&gt; $lods
+#&gt;      Intercept    Group
+#&gt; [1,]  41.76277 39.09288
+#&gt; [2,]  74.22959 71.35694
+#&gt; [3,]  74.22957 71.35699
+#&gt; [4,]  41.86223 38.98778
+#&gt; [5,]        NA       NA
+#&gt; 195 more rows ...
+#&gt; 
+#&gt; $F
+#&gt; [1] 3.538077e+06 8.145720e+12 8.170114e+12 3.551071e+06           NA
+#&gt; 195 more elements ...
+#&gt; 
+#&gt; $F.p.value
+#&gt; [1] 2.623224e-25 1.127503e-51 1.113617e-51 2.583672e-25           NA
+#&gt; 195 more elements ...
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

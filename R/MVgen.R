@@ -1,18 +1,18 @@
-
-# Amputation of the initial (simulated) dataset
-# dataset = dataset to be amputed
-# prop_NA = desired proportion of missing values in the amputed dataset
-
-#' Title
+#' @title Amputation of a dataset
+#' 
+#' @description This function is designed to ampute datasets.
+#' 
+#' @param dataset dataset to be amputed
+#' @param prop_NA desired proportion of missing values in the amputed dataset
 #'
-#' @param dataset 
-#' @param prop_NA 
-#'
-#' @return
+#' @return A dataset with missing values.
 #' @export
 #'
 #' @examples
-#' 1+1
+#' library(mi4p)
+#' data(datasim)
+#' datasim_amp <- MVgen(datasim, .2)
+#' sum(is.na(datasim_amp))/prod(dim(datasim_amp))
 MVgen <- function(dataset, prop_NA){
   data_NA <- dataset
   n_NA <- prop_NA * prod(dim(dataset))

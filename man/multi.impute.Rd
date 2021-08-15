@@ -2,27 +2,33 @@
 % Please edit documentation in R/multi_impute.R
 \name{multi.impute}
 \alias{multi.impute}
-\title{Title}
+\title{Function to impute quantitative datasets}
 \usage{
-multi.impute(data, conditions, nb.imp = NULL, method, parallel = F)
+multi.impute(data, conditions, nb.imp = NULL, method, parallel = FALSE)
 }
 \arguments{
-\item{data}{}
+\item{data}{Dataset to impute.}
 
-\item{conditions}{}
+\item{conditions}{Vector with the condition values.}
 
-\item{nb.imp}{}
+\item{nb.imp}{Number of imputed dataset to create.}
 
-\item{method}{}
+\item{method}{Imputation method, choose from \code{c("pmm", "midastouch", 
+"sample", "cart", "rf", "mean", "norm", "norm.nob", "norm.boot", 
+"norm.predict")}.}
 
-\item{parallel}{}
+\item{parallel}{Use parallel computing?}
 }
 \value{
-
+a numeric array of dim c(dim(data),nb.imp).
 }
 \description{
-Title
+This function creates an array made of slices of imputed dataset. Imputation methods can be chosen from \code{c("pmm", "midastouch", 
+"sample", "cart", "rf", "mean", "norm", "norm.nob", "norm.boot", 
+"norm.predict")}.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+multi.impute(data = datasim[,-1], conditions = attr(datasim,"metadata")$Condition, method = "MLE")
 }

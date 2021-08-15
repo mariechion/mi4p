@@ -2,31 +2,38 @@
 % Please edit documentation in R/rubin2wt_all.R
 \name{rubin2wt.all}
 \alias{rubin2wt.all}
-\title{Title}
+\title{2nd Rubin's rule Within-Variance Component (all peptides)}
 \usage{
 rubin2wt.all(
   data,
-  funcvar = within_variance_comp_emmeans,
+  funcvar = mi4p::within_variance_comp_emmeans,
   metacond,
   is.parallel = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{data}{}
+\item{data}{dataset}
 
-\item{funcvar}{}
+\item{funcvar}{function that should be used to compute the variance}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 
-\item{is.parallel}{}
+\item{is.parallel}{should parallel computing be used?}
+
+\item{verbose}{should messages be displayed?}
 }
 \value{
-
+List of variance-covariance matrices.
 }
 \description{
-Title
+Computes the within-variance component in the 2nd Rubin's rule for all peptides.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], 
+conditions = attr(datasim,"metadata")$Condition, method = "MLE")
+rubin2wt.all(datasim_imp[1:5,,],funcvar = within_variance_comp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

@@ -2,25 +2,30 @@
 % Please edit documentation in R/rubin1_one.R
 \name{rubin1.one}
 \alias{rubin1.one}
-\title{Title}
+\title{First Rubin rule (a given peptide)}
 \usage{
 rubin1.one(peptide, data, funcmean = meanImp_emmeans, metacond)
 }
 \arguments{
-\item{peptide}{}
+\item{peptide}{peptide for which the variance-covariance matrix should be derived.}
 
-\item{data}{}
+\item{data}{dataset}
 
-\item{funcmean}{}
+\item{funcmean}{function that should be used to compute the mean}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 }
 \value{
-
+A vector of estimated parameters.
 }
 \description{
-Title
+Computes the first Rubin's rule for a given peptide.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin1.one(1,datasim_imp,funcmean = meanImp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

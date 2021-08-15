@@ -2,25 +2,29 @@
 % Please edit documentation in R/meanImp_emmeans.R
 \name{meanImp_emmeans}
 \alias{meanImp_emmeans}
-\title{Title}
+\title{Multiple Imputation Estimate}
 \usage{
 meanImp_emmeans(ind, peptide = 1, tabdata, metacond)
 }
 \arguments{
-\item{ind}{}
+\item{ind}{index}
 
-\item{peptide}{}
+\item{peptide}{name of the peptide}
 
-\item{tabdata}{}
+\item{tabdata}{dataset}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 }
 \value{
-
+A vector.
 }
 \description{
-Title
+Computes the multiple imputation parameter estimate using the emmeans package.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+meanImp_emmeans(1,1,datasim_imp,attr(datasim,"metadata")$Condition)
 }

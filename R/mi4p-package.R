@@ -14,5 +14,6 @@
 #' 
 #' @importFrom stats lm median pchisq pf pt vcov
 #' @importFrom foreach %dopar%
+#' @importFrom stats rnorm
 # #' @importFrom grDevices dev.new
 NULL

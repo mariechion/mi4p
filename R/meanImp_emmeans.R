@@ -1,15 +1,21 @@
-#' Title
+#' @title Multiple Imputation Estimate
+#' 
+#' @description Computes the multiple imputation parameter estimate using the emmeans package.
 #'
-#' @param ind 
-#' @param peptide 
-#' @param tabdata 
-#' @param metacond 
+#' @param ind index 
+#' @param peptide name of the peptide
+#' @param tabdata dataset
+#' @param metacond a factor to specify the groups
 #'
-#' @return
+#' @return A vector.
 #' @export
 #'
 #' @examples
-#' 1+1
+#' library(mi4p)
+#' data(datasim)
+#' datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+#' attr(datasim,"metadata")$Condition, method = "MLE")
+#' meanImp_emmeans(1,1,datasim_imp,attr(datasim,"metadata")$Condition)
 meanImp_emmeans <- function(ind,peptide=1,tabdata,metacond) {
   tempdata <- cbind(reponse=tabdata[peptide,,ind],data.frame(fact=factor(metacond)))
   templm <- lm(reponse~fact,data=tempdata)

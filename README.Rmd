@@ -62,3 +62,137 @@ devtools::install_github("mariechion/mi4p")
 library(mi4p)
 ```
 
+```{r}
+set.seed(4619)
+datasim <- protdatasim()
+str(datasim)
+```
+
+It s the dataset shipped with package.
+```{r, eval=FALSE}
+save(datasim, file="datasim.RData", compress = "xz")
+```
+
+```{r}
+attr(datasim, "metadata")
+```
+
+
+## AMPUTATION
+```{r, cache=TRUE}
+MV1pct.NA.data <- MVgen(dataset = datasim[,-1], prop_NA = 0.01)
+MV1pct.NA.data
+```
+
+## IMPUTATION
+```{r, cache=TRUE}
+MV1pct.impMLE <- multi.impute(data = MV1pct.NA.data, conditions = attr(datasim,"metadata")$Condition, method = "MLE", parallel = FALSE)
+```
+
+## ESTIMATION
+```{r, cache=TRUE}
+print(paste(Sys.time(), "Dataset", 1, "out of", 1))
+MV1pct.impMLE.VarRubin.Mat <- rubin2.all(data = MV1pct.impMLE, metacond = attr(datasim, "metadata")$Condition) 
+```
+
+## PROJECTION
+```{r, cache=TRUE}
+print(paste("Dataset", 1, "out of",1, Sys.time()))
+MV1pct.impMLE.VarRubin.S2 <- as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat, function(aaa){
+    DesMat = DAPAR::make.design(attr(datasim, "metadata"))
+    return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
+  }))
+```
+
+## MODERATED T-TEST
+```{r, cache=TRUE}
+MV1pct.impMLE.mi4limma.res <- mi4limma(qData = apply(MV1pct.impMLE,1:2,mean), 
+                 sTab = attr(datasim, "metadata"), 
+                 VarRubin = sqrt(MV1pct.impMLE.VarRubin.S2))
+MV1pct.impMLE.mi4limma.res
+(simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[1:10]
+
+(simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[11:200]<=0.05
+```
+
+True positive rate
+```{r, cache=TRUE}
+sum((simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[1:10]<=0.05)/10
+```
+
+False positive rate
+```{r, cache=TRUE}
+sum((simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[11:200]<=0.05)/190
+```
+
+
+```{r, cache=TRUE}
+MV1pct.impMLE.dapar.res <-limmaCompleteTest.mod(qData = apply(MV1pct.impMLE,1:2,mean), sTab = attr(datasim, "metadata"))
+MV1pct.impMLE.dapar.res
+```
+
+Simulate a list of 100 datasets.
+```{r}
+set.seed(4619)
+norm.200.m100.sd1.vs.m200.sd1.list <- lapply(1:100, protdatasim)
+metadata <- attr(norm.200.m100.sd1.vs.m200.sd1.list[[1]],"metadata")
+```
+
+It is the list of dataset shipped with package.
+```{r, eval=FALSE}
+save(norm.200.m100.sd1.vs.m200.sd1.list, file="norm.200.m100.sd1.vs.m200.sd1.list.RData", compress = "xz")
+```
+
+100 datasets with parallel comuting support. Quite long to run even with parallel computing support.
+```{r, eval=FALSE}
+library(foreach)
+doParallel::registerDoParallel(cores=NULL)
+requireNamespace("foreach",quietly = TRUE)
+```
+
+## AMPUTATION
+```{r, eval=FALSE}
+MV1pct.NA.data <- foreach::foreach(iforeach =  norm.200.m100.sd1.vs.m200.sd1.list,
+                          .errorhandling = 'stop', .verbose = T) %dopar% 
+  MVgen(dataset = iforeach[,-1], prop_NA = 0.01)
+```
+
+## IMPUTATION
+```{r, eval=FALSE}
+MV1pct.impMLE <- foreach::foreach(iforeach =  MV1pct.NA.data,
+                         .errorhandling = 'stop', .verbose = F) %dopar% 
+  multi.impute(data = iforeach, conditions = metadata$Condition, 
+               method = "MLE", parallel  = F)
+```
+
+## ESTIMATION
+```{r, eval=FALSE}
+MV1pct.impMLE.VarRubin.Mat <- lapply(1:length(MV1pct.impMLE), function(index){
+  print(paste(Sys.time(), "Dataset", index, "out of", length(MV1pct.impMLE)))
+  rubin2.all(data = MV1pct.impMLE[[index]], metacond = metadata$Condition) 
+})
+```
+
+## PROJECTION
+```{r, eval=FALSE}
+MV1pct.impMLE.VarRubin.S2 <- lapply(1:length(MV1pct.impMLE.VarRubin.Mat), function(id.dataset){
+  print(paste("Dataset", id.dataset, "out of",length(MV1pct.impMLE.VarRubin.Mat), Sys.time()))
+  as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat[[id.dataset]], function(aaa){
+    DesMat = DAPAR::make.design(metadata)
+    return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
+  }))
+})
+```
+
+## MODERATED T-TEST
+```{r, eval=FALSE}
+MV1pct.impMLE.mi4limma.res <- foreach(iforeach =  1:100,  .errorhandling = 'stop', .verbose = T) %dopar%
+  mi4limma(qData = apply(MV1pct.impMLE[[iforeach]],1:2,mean), 
+                 sTab = metadata, 
+                 VarRubin = sqrt(MV1pct.impMLE.VarRubin.S2[[iforeach]]))
+
+MV1pct.impMLE.dapar.res <- foreach(iforeach =  1:100,  .errorhandling = 'stop', .verbose = T) %dopar%
+  limmaCompleteTest.mod(qData = apply(MV1pct.impMLE[[iforeach]],1:2,mean), 
+                        sTab = metadata)
+```
+

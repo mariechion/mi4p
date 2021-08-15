@@ -1,23 +1,29 @@
-# Computes first Rubin's rule for all peptides
-
-#' Title
+#' @title First Rubin rule (all peptide)
+#' 
+#' @description Computes the first Rubin's rule for all the peptide.
 #'
-#' @param data 
-#' @param metacond 
-#' @param funcmean 
-#' @param is.parallel 
+#' @param data dataset
+#' @param metacond a factor to specify the groups
+#' @param funcmean function that should be used to compute the mean
+#' @param is.parallel should parallel computing be used?
+#' @param verbose should messages be displayed?
 #'
-#' @return
+#' @return A vector of estimated parameters.
 #' @export
 #'
 #' @examples
-#' 1+1
-rubin1.all <- function(data, metacond, funcmean = meanImp_emmeans, is.parallel = FALSE) {
+#' library(mi4p)
+#' data(datasim)
+#' datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+#' attr(datasim,"metadata")$Condition, method = "MLE")
+#' rubin1.all(datasim_imp[1:5,,],funcmean = meanImp_emmeans,
+#' attr(datasim,"metadata")$Condition)
+rubin1.all <- function(data, metacond, funcmean = meanImp_emmeans, is.parallel = FALSE, verbose=FALSE) {
   if (is.parallel) {
     iforeach<-NA
     requireNamespace("foreach",quietly = TRUE)
     res<-foreach::foreach(iforeach=1:dim(data)[1], .combine=cbind, 
-                 .errorhandling = 'remove', .verbose = FALSE) %dopar% 
+                 .errorhandling = 'remove', .verbose = verbose) %dopar% 
       rubin1.one(iforeach,data=data,
                  funcmean=funcmean,metacond=metacond)
     res<-t(simplify2array(res))

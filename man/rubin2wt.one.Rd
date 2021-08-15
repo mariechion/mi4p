@@ -2,25 +2,30 @@
 % Please edit documentation in R/rubin2wt_one.R
 \name{rubin2wt.one}
 \alias{rubin2wt.one}
-\title{Title}
+\title{2nd Rubin's rule Within-Variance Component (a given peptide)}
 \usage{
 rubin2wt.one(peptide, data, funcvar, metacond)
 }
 \arguments{
-\item{peptide}{}
+\item{peptide}{peptide for which the variance-covariance matrix should be derived.}
 
-\item{data}{}
+\item{data}{dataset}
 
-\item{funcvar}{}
+\item{funcvar}{function that should be used to compute the variance}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 }
 \value{
-
+A variance-covariance matrix.
 }
 \description{
-Title
+Computes the within-variance component in the 2nd Rubin's rule for a given peptide.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin2wt.one(1,datasim_imp,funcvar=within_variance_comp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

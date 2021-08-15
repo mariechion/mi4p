@@ -2,25 +2,30 @@
 % Please edit documentation in R/within_variance_comp_emmeans.R
 \name{within_variance_comp_emmeans}
 \alias{within_variance_comp_emmeans}
-\title{Title}
+\title{Multiple Imputation Within Variance Component}
 \usage{
 within_variance_comp_emmeans(ind, peptide, data, metacond)
 }
 \arguments{
-\item{ind}{}
+\item{ind}{index}
 
-\item{peptide}{}
+\item{peptide}{name of the peptide}
 
-\item{data}{}
+\item{data}{dataset}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 }
 \value{
-
+A variance-covariance matrix.
 }
 \description{
-Title
+Computes the multiple imputation within variance component using the emmeans package.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+within_variance_comp_emmeans(1,1,datasim_imp,
+attr(datasim,"metadata")$Condition)
 }

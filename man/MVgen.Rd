@@ -2,21 +2,24 @@
 % Please edit documentation in R/MVgen.R
 \name{MVgen}
 \alias{MVgen}
-\title{Title}
+\title{Amputation of a dataset}
 \usage{
 MVgen(dataset, prop_NA)
 }
 \arguments{
-\item{dataset}{}
+\item{dataset}{dataset to be amputed}
 
-\item{prop_NA}{}
+\item{prop_NA}{desired proportion of missing values in the amputed dataset}
 }
 \value{
-
+A dataset with missing values.
 }
 \description{
-Title
+This function is designed to ampute datasets.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_amp <- MVgen(datasim, .2)
+sum(is.na(datasim_amp))/prod(dim(datasim_amp))
 }

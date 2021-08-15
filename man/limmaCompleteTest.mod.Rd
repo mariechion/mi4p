@@ -2,23 +2,32 @@
 % Please edit documentation in R/limmaCompleteTest_mod.R
 \name{limmaCompleteTest.mod}
 \alias{limmaCompleteTest.mod}
-\title{Title}
+\title{Computes a hierarchical differential analysis}
 \usage{
 limmaCompleteTest.mod(qData, sTab, comp.type = "OnevsOne")
 }
 \arguments{
-\item{qData}{}
+\item{qData}{A matrix of quantitative data, without any missing values.}
 
-\item{sTab}{}
+\item{sTab}{A dataframe of experimental design (\code{pData()}).}
 
-\item{comp.type}{}
+\item{comp.type}{A string that corresponds to the type of comparison. Values are: 'anova1way', 'OnevsOne' and 'OnevsAll'; default is 'OnevsOne'.}
 }
 \value{
-
+A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
 }
 \description{
-Title
+Modified version of the \code{limmaCompleteTest} function from the \code{DAPAR} package to return both the fit and the results.
 }
 \examples{
-1+1
+library(DAPAR)
+set.seed(2016)
+utils::data(Exp1_R25_pept, package='DAPARdata')
+obj <- Exp1_R25_pept
+qData <- Biobase::exprs(obj)
+sTab <- Biobase::pData(obj)
+limma <- limmaCompleteTest.mod(qData, sTab, comp.type='OnevsOne')
+}
+\author{
+Adapted from Hélène Borges, Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek
 }

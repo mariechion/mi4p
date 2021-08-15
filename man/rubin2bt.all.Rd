@@ -2,7 +2,7 @@
 % Please edit documentation in R/rubin2bt_all.R
 \name{rubin2bt.all}
 \alias{rubin2bt.all}
-\title{Title}
+\title{2nd Rubin's rule Between-Imputation component (all peptides)}
 \usage{
 rubin2bt.all(
   data,
@@ -13,20 +13,27 @@ rubin2bt.all(
 )
 }
 \arguments{
-\item{data}{}
+\item{data}{dataset}
 
-\item{funcmean}{}
+\item{funcmean}{function that should be used to compute the mean}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 
-\item{is.parallel}{}
+\item{is.parallel}{should parallel computing be used?}
+
+\item{verbose}{should messages be displayed?}
 }
 \value{
-
+List of variance-covariance matrices.
 }
 \description{
-Title
+Computes the between-imputation component in the 2nd Rubin's rule for all peptides.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin2bt.all(datasim_imp[1:5,,],funcmean = meanImp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

@@ -1,19 +1,24 @@
-# Computes the within-variance component in the 2nd Rubin's rule 
-# for all peptides
-
-#' Title
+#' @title 2nd Rubin's rule Within-Variance Component (all peptides)
+#' 
+#' @description Computes the within-variance component in the 2nd Rubin's rule for all peptides.
 #'
-#' @param data 
-#' @param funcvar 
-#' @param metacond 
-#' @param is.parallel 
+#' @param data dataset
+#' @param funcvar function that should be used to compute the variance
+#' @param metacond a factor to specify the groups
+#' @param is.parallel should parallel computing be used?
+#' @param verbose should messages be displayed?
 #'
-#' @return
+#' @return List of variance-covariance matrices.
 #' @export
 #'
 #' @examples
-#' 1+1
-rubin2wt.all <- function(data, funcvar = within_variance_comp_emmeans, 
+#' library(mi4p)
+#' data(datasim)
+#' datasim_imp <- multi.impute(data = datasim[,-1], 
+#' conditions = attr(datasim,"metadata")$Condition, method = "MLE")
+#' rubin2wt.all(datasim_imp[1:5,,],funcvar = within_variance_comp_emmeans,
+#' attr(datasim,"metadata")$Condition)
+rubin2wt.all <- function(data, funcvar = mi4p::within_variance_comp_emmeans, 
                          metacond, is.parallel = FALSE, verbose = TRUE) {
   if (is.parallel) {
     iforeach<-NULL

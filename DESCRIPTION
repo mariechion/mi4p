@@ -2,11 +2,12 @@ Package: mi4p
 Type: Package
 Title: Multiple Imputation for Proteomics
 Version: 0.5
-Date: 2021-08-11
+Date: 2021-08-15
 Depends: R (>= 3.5.0)
 biocViews:
 Imports: 
     DAPAR,
+    DAPARdata,
     emmeans,
     foreach,
     imp4p,
@@ -26,7 +27,7 @@ Authors@R: c(
 	)
 Author: Marie Chion [aut] (<https://orcid.org/0000-0001-8956-8388>), Christine Carapito [aut] (<https://orcid.org/0000-0002-0079-319X>), Frederic Bertrand [cre, aut] (<https://orcid.org/0000-0002-0837-8281>)
 Maintainer: Frederic Bertrand <frederic.bertrand@utt.fr>
-Description: A framework for multiple imputation for proteomics is proposed by Marie Chion, Christine Carapito and Frédéric Bertrand <arxiv:>. It is dedicated to dealing with multiple imputation for proteomics.
+Description: A framework for multiple imputation for proteomics is proposed by Marie Chion, Christine Carapito and Frederic Bertrand. It is dedicated to dealing with multiple imputation for proteomics.
 License: GPL (>= 2)
 Encoding: UTF-8
 Classification/MSC: 62J05, 62J07, 62J99, 92C42

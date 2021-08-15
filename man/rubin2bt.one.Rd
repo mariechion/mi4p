@@ -2,25 +2,30 @@
 % Please edit documentation in R/rubin2bt_one.R
 \name{rubin2bt.one}
 \alias{rubin2bt.one}
-\title{Title}
+\title{2nd Rubin's rule Between-Imputation Component (a given peptide)}
 \usage{
 rubin2bt.one(peptide, data, funcmean, metacond)
 }
 \arguments{
-\item{peptide}{}
+\item{peptide}{peptide for which the variance-covariance matrix should be derived.}
 
-\item{data}{}
+\item{data}{dataset}
 
-\item{funcmean}{}
+\item{funcmean}{function that should be used to compute the mean}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 }
 \value{
-
+A variance-covariance matrix.
 }
 \description{
-Title
+Computes the between-imputation component in the 2nd Rubin's rule for a given peptide.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin2bt.one(1,datasim_imp,funcmean = meanImp_emmeans,
+attr(datasim,"metadata")$Condition)
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — rubin2bt.one • mi4p</title>
+<title>2nd Rubin's rule Between-Imputation Component (a given peptide) — rubin2bt.one • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Title — rubin2bt.one" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="2nd Rubin's rule Between-Imputation Component (a given peptide) — rubin2bt.one" />
+<meta property="og:description" content="Computes the between-imputation component in the 2nd Rubin's rule for a given peptide." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,13 +131,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>2nd Rubin's rule Between-Imputation Component (a given peptide)</h1>
     <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/rubin2bt_one.R'><code>R/rubin2bt_one.R</code></a></small>
     <div class="hidden name"><code>rubin2bt.one.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Computes the between-imputation component in the 2nd Rubin's rule for a given peptide.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rubin2bt.one</span><span class='op'>(</span><span class='va'>peptide</span>, <span class='va'>data</span>, <span class='va'>funcmean</span>, <span class='va'>metacond</span><span class='op'>)</span></pre>
@@ -147,31 +147,36 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>peptide</th>
-      <td></td>
+      <td><p>peptide for which the variance-covariance matrix should be derived.</p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td></td>
+      <td><p>dataset</p></td>
     </tr>
     <tr>
       <th>funcmean</th>
-      <td></td>
+      <td><p>function that should be used to compute the mean</p></td>
     </tr>
     <tr>
       <th>metacond</th>
-      <td></td>
+      <td><p>a factor to specify the groups</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>A variance-covariance matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>+</span><span class='fl'>1</span>
-</div><div class='output co'>#&gt; [1] 2</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mariechion.github.io/mi4p/'>mi4p</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>datasim</span><span class='op'>)</span>
+<span class='va'>datasim_imp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='multi.impute.html'>multi.impute</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>datasim</span><span class='op'>[</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, conditions <span class='op'>=</span> 
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span>, method <span class='op'>=</span> <span class='st'>"MLE"</span><span class='op'>)</span>
+<span class='fu'>rubin2bt.one</span><span class='op'>(</span><span class='fl'>1</span>,<span class='va'>datasim_imp</span>,funcmean <span class='op'>=</span> <span class='va'>meanImp_emmeans</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      [,1] [,2]
+#&gt; [1,]    0    0
+#&gt; [2,]    0    0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

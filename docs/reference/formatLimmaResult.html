@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — formatLimmaResult • mi4p</title>
+<title>Format a Result from Limma — formatLimmaResult • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Title — formatLimmaResult" />
+<meta property="og:title" content="Format a Result from Limma — formatLimmaResult" />
 <meta property="og:description" content="It is not exported by DAPAR and has to be reproduced here." />
 <meta property="og:image" content="/logo.png" />
 
@@ -131,7 +131,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Format a Result from Limma</h1>
     <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/formatLimmaResult.R'><code>R/formatLimmaResult.R</code></a></small>
     <div class="hidden name"><code>formatLimmaResult.Rd</code></div>
     </div>
@@ -147,27 +147,60 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td></td>
+      <td><p>Limma fit</p></td>
     </tr>
     <tr>
       <th>conds</th>
-      <td></td>
+      <td><p>Condition vector</p></td>
     </tr>
     <tr>
       <th>contrast</th>
-      <td></td>
+      <td><p>Contrast vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-
+    <p>Adapted from the code of Samuel Wieczorek in the DAPAR package as it is an object that is not exported by the DAPAR package.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>+</span><span class='fl'>1</span>
-</div><div class='output co'>#&gt; [1] 2</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.prostar-proteomics.org/'>DAPAR</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
+#&gt; <span class='message'>  method            from</span>
+#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; <span class='warning'>Warning: mzR has been built against a different Rcpp version (1.0.6)</span>
+#&gt; <span class='warning'>than is installed on your system (1.0.7). This might lead to errors</span>
+#&gt; <span class='warning'>when loading mzR. If you encounter such issues, please send a report,</span>
+#&gt; <span class='warning'>including the output of sessionInfo() to the Bioc support forum at </span>
+#&gt; <span class='warning'>https://support.bioconductor.org/. For details see also</span>
+#&gt; <span class='warning'>https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
+<span class='va'>contrast</span><span class='op'>=</span><span class='fl'>1</span>
+<span class='fu'>utils</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Exp1_R25_pept</span>, package<span class='op'>=</span><span class='st'>'DAPARdata'</span><span class='op'>)</span>
+<span class='va'>obj</span> <span class='op'>&lt;-</span> <span class='va'>Exp1_R25_pept</span>
+<span class='va'>qData</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/exprs.html'>exprs</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>1000</span>,<span class='op'>]</span>
+<span class='va'>sTab</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/phenoData.html'>pData</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>sTab</span><span class='op'>$</span><span class='va'>Sample.name</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span> <span class='op'>&lt;-</span><span class='va'>sTab</span><span class='op'>$</span><span class='va'>Sample.name</span>
+<span class='va'>sTab.old</span> <span class='op'>&lt;-</span> <span class='va'>sTab</span>
+<span class='va'>conds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>$</span><span class='va'>Condition</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>sTab</span> <span class='op'>&lt;-</span> <span class='va'>sTab</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span><span class='op'>(</span><span class='va'>sTab</span>, <span class='va'>conds</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>x</span><span class='op'>[</span><span class='st'>"Sample.name"</span><span class='op'>]</span>
+<span class='op'>}</span><span class='op'>)</span><span class='op'>)</span>, <span class='op'>]</span>
+<span class='va'>qData</span> <span class='op'>&lt;-</span> <span class='va'>qData</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/split.html'>split</a></span><span class='op'>(</span><span class='va'>sTab.old</span>, <span class='va'>conds</span><span class='op'>)</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>x</span><span class='op'>[</span><span class='st'>"Sample.name"</span><span class='op'>]</span>
+<span class='op'>}</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>conds</span> <span class='op'>&lt;-</span> <span class='va'>conds</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span><span class='op'>(</span><span class='va'>conds</span><span class='op'>)</span><span class='op'>]</span>
+<span class='va'>res.l</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+<span class='va'>design.matrix</span> <span class='op'>&lt;-</span> <span class='fu'>DAPAR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DAPAR/man/make.design.html'>make.design</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>)</span>
+<span class='va'>contra</span> <span class='op'>&lt;-</span> <span class='fu'>DAPAR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/DAPAR/man/make.contrast.html'>make.contrast</a></span><span class='op'>(</span><span class='va'>design.matrix</span>, condition <span class='op'>=</span> <span class='va'>conds</span>, 
+                                 <span class='va'>contrast</span><span class='op'>)</span>
+<span class='va'>cmtx</span> <span class='op'>&lt;-</span> <span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/makeContrasts.html'>makeContrasts</a></span><span class='op'>(</span>contrasts <span class='op'>=</span> <span class='va'>contra</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/make.names.html'>make.names</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>design.matrix</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/ebayes.html'>eBayes</a></span><span class='op'>(</span><span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/contrasts.fit.html'>contrasts.fit</a></span><span class='op'>(</span><span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/lmFit.html'>lmFit</a></span><span class='op'>(</span><span class='va'>qData</span>, 
+                                                      <span class='va'>design.matrix</span><span class='op'>)</span>, <span class='va'>cmtx</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Partial NA coefficients for 58 probe(s)</span></div><div class='input'><span class='va'>res.l</span> <span class='op'>&lt;-</span> <span class='fu'>mi4p</span><span class='fu'>::</span><span class='fu'>formatLimmaResult</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>conds</span>, <span class='va'>contrast</span><span class='op'>)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

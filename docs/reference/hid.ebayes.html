@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — hid.ebayes • mi4p</title>
+<title>MI-aware Modifed eBayes Function — hid.ebayes • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Title — hid.ebayes" />
-<meta property="og:description" content="Title" />
+<meta property="og:title" content="MI-aware Modifed eBayes Function — hid.ebayes" />
+<meta property="og:description" content="Modified eBayes function to be used instead of the one in the limma package" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,19 +131,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>MI-aware Modifed eBayes Function</h1>
     <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/hid_ebayes.R'><code>R/hid_ebayes.R</code></a></small>
     <div class="hidden name"><code>hid.ebayes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Title</p>
+    <p>Modified eBayes function to be used instead of the one in the limma package</p>
     </div>
 
     <pre class="usage"><span class='fu'>hid.ebayes</span><span class='op'>(</span>
   <span class='va'>fit</span>,
   <span class='va'>VarRubin</span>,
-  mod <span class='op'>=</span> <span class='cn'>T</span>,
+  mod <span class='op'>=</span> <span class='cn'>TRUE</span>,
   proportion <span class='op'>=</span> <span class='fl'>0.01</span>,
   stdev.coef.lim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>4</span><span class='op'>)</span>,
   trend <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -156,47 +156,761 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fit</th>
-      <td></td>
+      <td><p>an MArrayLM fitted model object produced by lmFit or contrasts.fit. For ebayes only, fit can alternatively be an unclassed list produced by lm.series, gls.series or mrlm containing components coefficients, stdev.unscaled, sigma and df.residual.</p></td>
     </tr>
     <tr>
       <th>VarRubin</th>
-      <td></td>
+      <td><p>a variance-covariance matrix.</p></td>
     </tr>
     <tr>
       <th>mod</th>
-      <td></td>
+      <td><p>TRUE (not used at the moment)</p></td>
     </tr>
     <tr>
       <th>proportion</th>
-      <td></td>
+      <td><p>numeric value between 0 and 1, assumed proportion of genes which are differentially expressed</p></td>
     </tr>
     <tr>
       <th>stdev.coef.lim</th>
-      <td></td>
+      <td><p>numeric vector of length 2, assumed lower and upper limits for the standard deviation of log2-fold-changes for differentially expressed genes</p></td>
     </tr>
     <tr>
       <th>trend</th>
-      <td></td>
+      <td><p>logical, should an intensity-trend be allowed for the prior variance? Default is that the prior variance is constant.</p></td>
     </tr>
     <tr>
       <th>robust</th>
-      <td></td>
+      <td><p>logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances?</p></td>
     </tr>
     <tr>
       <th>winsor.tail.p</th>
-      <td></td>
+      <td><p>numeric vector of length 1 or 2, giving left and right tail proportions of x to Winsorize. Used only when robust=TRUE.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
+    <p>eBayes produces an object of class MArrayLM (see MArrayLM-class) containing everything found in <code>fit</code> plus the following added components:</p><dl>
+<dt>t</dt><dd><p>numeric matrix of moderated t-statistics.</p></dd>
+<dt>p.value</dt><dd><p>numeric matrix of two-sided p-values corresponding to the t-statistics.</p></dd>
+<dt>lods</dt><dd><p>numeric matrix giving the log-odds of differential expression (on the natural log scale).</p></dd>
+<dt>s2.prior</dt><dd><p>estimated prior value for sigma^2. A row-wise vector if covariate is non-NULL, otherwise a single value.</p></dd>
+<dt>df.prior</dt><dd><p>degrees of freedom associated with s2.prior. A row-wise vector if robust=TRUE, otherwise a single value.</p></dd>
+<dt>df.total</dt><dd><p>row-wise numeric vector giving the total degrees of freedom associated with the t-statistics for each gene. Equal to df.prior+df.residual or sum(df.residual), whichever is smaller.</p></dd>
+<dt>s2.post</dt><dd><p>row-wise numeric vector giving the posterior values for sigma^2.</p></dd>
+<dt>var.prior</dt><dd><p>column-wise numeric vector giving estimated prior values for the variance of the log2-fold-changes for differentially expressed gene for each constrast. Used for evaluating lods.</p></dd>
+<dt>F</dt><dd><p>row-wise numeric vector of moderated F-statistics for testing all contrasts defined by the columns of fit simultaneously equal to zero.</p></dd>
+<dt>F.p.value</dt><dd><p>row-wise numeric vector giving p-values corresponding to F.</p></dd>
 
+</dl>
 
+<p>The matrices t, p.value and lods have the same dimensions as the input object fit, with rows corresponding to genes and columns to coefficients or contrasts. The vectors s2.prior, df.prior, df.total, F and F.p.value correspond to rows, with length equal to the number of genes. The vector var.prior corresponds to columns, with length equal to the number of contrasts. If s2.prior or df.prior have length 1, then the same value applies to all genes.</p>
+<p>s2.prior, df.prior and var.prior contain empirical Bayes hyperparameters used to obtain df.total, s2.post and lods.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Modified by M. Chion and F. Bertrand. Original by Gordon Smyth and Davis McCarthy</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fl'>1</span><span class='op'>+</span><span class='fl'>1</span>
-</div><div class='output co'>#&gt; [1] 2</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mariechion.github.io/mi4p/'>mi4p</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>datasim</span><span class='op'>)</span>
+<span class='va'>datasim_imp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='multi.impute.html'>multi.impute</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>datasim</span><span class='op'>[</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, conditions <span class='op'>=</span> 
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span>, method <span class='op'>=</span> <span class='st'>"MLE"</span><span class='op'>)</span>
+<span class='va'>VarRubin.matrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='rubin2.all.html'>rubin2.all</a></span><span class='op'>(</span><span class='va'>datasim_imp</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,,<span class='op'>]</span>,
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
+<span class='va'>sigma2</span> <span class='op'>&lt;-</span> <span class='fl'>0.05</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/stats/Chisquare.html'>rchisq</a></span><span class='op'>(</span><span class='fl'>100</span>, df<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>10</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>datasim_imp</span><span class='op'>[</span>,,<span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>design</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>Intercept<span class='op'>=</span><span class='fl'>1</span>,Group<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span>
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>fit.model</span> <span class='op'>&lt;-</span> <span class='fu'>limma</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/limma/man/lmFit.html'>lmFit</a></span><span class='op'>(</span><span class='va'>y</span>,<span class='va'>design</span><span class='op'>)</span>
+<span class='fu'>hid.ebayes</span><span class='op'>(</span>fit<span class='op'>=</span><span class='va'>fit.model</span>,<span class='va'>VarRubin.matrix</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Zero sample variances detected, have been offset away from zero</span></div><div class='output co'>#&gt; $df.prior
+#&gt; [1] 0.2886034
+#&gt; 
+#&gt; $s2.prior
+#&gt; [1] 4.391122e-07
+#&gt; 
+#&gt; $s2.post
+#&gt;   [1] 3.526045e-02 1.528958e-08 1.528958e-08 3.526045e-02           NA
+#&gt;   [6]           NA           NA           NA           NA           NA
+#&gt;  [11]           NA           NA           NA           NA           NA
+#&gt;  [16]           NA           NA           NA           NA           NA
+#&gt;  [21]           NA           NA           NA           NA           NA
+#&gt;  [26]           NA           NA           NA           NA           NA
+#&gt;  [31]           NA           NA           NA           NA           NA
+#&gt;  [36]           NA           NA           NA           NA           NA
+#&gt;  [41]           NA           NA           NA           NA           NA
+#&gt;  [46]           NA           NA           NA           NA           NA
+#&gt;  [51]           NA           NA           NA           NA           NA
+#&gt;  [56]           NA           NA           NA           NA           NA
+#&gt;  [61]           NA           NA           NA           NA           NA
+#&gt;  [66]           NA           NA           NA           NA           NA
+#&gt;  [71]           NA           NA           NA           NA           NA
+#&gt;  [76]           NA           NA           NA           NA           NA
+#&gt;  [81]           NA           NA           NA           NA           NA
+#&gt;  [86]           NA           NA           NA           NA           NA
+#&gt;  [91]           NA           NA           NA           NA           NA
+#&gt;  [96]           NA           NA           NA           NA           NA
+#&gt; [101]           NA           NA           NA           NA           NA
+#&gt; [106]           NA           NA           NA           NA           NA
+#&gt; [111]           NA           NA           NA           NA           NA
+#&gt; [116]           NA           NA           NA           NA           NA
+#&gt; [121]           NA           NA           NA           NA           NA
+#&gt; [126]           NA           NA           NA           NA           NA
+#&gt; [131]           NA           NA           NA           NA           NA
+#&gt; [136]           NA           NA           NA           NA           NA
+#&gt; [141]           NA           NA           NA           NA           NA
+#&gt; [146]           NA           NA           NA           NA           NA
+#&gt; [151]           NA           NA           NA           NA           NA
+#&gt; [156]           NA           NA           NA           NA           NA
+#&gt; [161]           NA           NA           NA           NA           NA
+#&gt; [166]           NA           NA           NA           NA           NA
+#&gt; [171]           NA           NA           NA           NA           NA
+#&gt; [176]           NA           NA           NA           NA           NA
+#&gt; [181]           NA           NA           NA           NA           NA
+#&gt; [186]           NA           NA           NA           NA           NA
+#&gt; [191]           NA           NA           NA           NA           NA
+#&gt; [196]           NA           NA           NA           NA           NA
+#&gt; 
+#&gt; $t
+#&gt;          Intercept        Group
+#&gt;   [1,]    1179.208     852.2383
+#&gt;   [2,] 1811647.135 1269400.9619
+#&gt;   [3,] 1801623.098 1284808.0990
+#&gt;   [4,]    1191.913     842.6404
+#&gt;   [5,]          NA           NA
+#&gt;   [6,]          NA           NA
+#&gt;   [7,]          NA           NA
+#&gt;   [8,]          NA           NA
+#&gt;   [9,]          NA           NA
+#&gt;  [10,]          NA           NA
+#&gt;  [11,]          NA           NA
+#&gt;  [12,]          NA           NA
+#&gt;  [13,]          NA           NA
+#&gt;  [14,]          NA           NA
+#&gt;  [15,]          NA           NA
+#&gt;  [16,]          NA           NA
+#&gt;  [17,]          NA           NA
+#&gt;  [18,]          NA           NA
+#&gt;  [19,]          NA           NA
+#&gt;  [20,]          NA           NA
+#&gt;  [21,]          NA           NA
+#&gt;  [22,]          NA           NA
+#&gt;  [23,]          NA           NA
+#&gt;  [24,]          NA           NA
+#&gt;  [25,]          NA           NA
+#&gt;  [26,]          NA           NA
+#&gt;  [27,]          NA           NA
+#&gt;  [28,]          NA           NA
+#&gt;  [29,]          NA           NA
+#&gt;  [30,]          NA           NA
+#&gt;  [31,]          NA           NA
+#&gt;  [32,]          NA           NA
+#&gt;  [33,]          NA           NA
+#&gt;  [34,]          NA           NA
+#&gt;  [35,]          NA           NA
+#&gt;  [36,]          NA           NA
+#&gt;  [37,]          NA           NA
+#&gt;  [38,]          NA           NA
+#&gt;  [39,]          NA           NA
+#&gt;  [40,]          NA           NA
+#&gt;  [41,]          NA           NA
+#&gt;  [42,]          NA           NA
+#&gt;  [43,]          NA           NA
+#&gt;  [44,]          NA           NA
+#&gt;  [45,]          NA           NA
+#&gt;  [46,]          NA           NA
+#&gt;  [47,]          NA           NA
+#&gt;  [48,]          NA           NA
+#&gt;  [49,]          NA           NA
+#&gt;  [50,]          NA           NA
+#&gt;  [51,]          NA           NA
+#&gt;  [52,]          NA           NA
+#&gt;  [53,]          NA           NA
+#&gt;  [54,]          NA           NA
+#&gt;  [55,]          NA           NA
+#&gt;  [56,]          NA           NA
+#&gt;  [57,]          NA           NA
+#&gt;  [58,]          NA           NA
+#&gt;  [59,]          NA           NA
+#&gt;  [60,]          NA           NA
+#&gt;  [61,]          NA           NA
+#&gt;  [62,]          NA           NA
+#&gt;  [63,]          NA           NA
+#&gt;  [64,]          NA           NA
+#&gt;  [65,]          NA           NA
+#&gt;  [66,]          NA           NA
+#&gt;  [67,]          NA           NA
+#&gt;  [68,]          NA           NA
+#&gt;  [69,]          NA           NA
+#&gt;  [70,]          NA           NA
+#&gt;  [71,]          NA           NA
+#&gt;  [72,]          NA           NA
+#&gt;  [73,]          NA           NA
+#&gt;  [74,]          NA           NA
+#&gt;  [75,]          NA           NA
+#&gt;  [76,]          NA           NA
+#&gt;  [77,]          NA           NA
+#&gt;  [78,]          NA           NA
+#&gt;  [79,]          NA           NA
+#&gt;  [80,]          NA           NA
+#&gt;  [81,]          NA           NA
+#&gt;  [82,]          NA           NA
+#&gt;  [83,]          NA           NA
+#&gt;  [84,]          NA           NA
+#&gt;  [85,]          NA           NA
+#&gt;  [86,]          NA           NA
+#&gt;  [87,]          NA           NA
+#&gt;  [88,]          NA           NA
+#&gt;  [89,]          NA           NA
+#&gt;  [90,]          NA           NA
+#&gt;  [91,]          NA           NA
+#&gt;  [92,]          NA           NA
+#&gt;  [93,]          NA           NA
+#&gt;  [94,]          NA           NA
+#&gt;  [95,]          NA           NA
+#&gt;  [96,]          NA           NA
+#&gt;  [97,]          NA           NA
+#&gt;  [98,]          NA           NA
+#&gt;  [99,]          NA           NA
+#&gt; [100,]          NA           NA
+#&gt; [101,]          NA           NA
+#&gt; [102,]          NA           NA
+#&gt; [103,]          NA           NA
+#&gt; [104,]          NA           NA
+#&gt; [105,]          NA           NA
+#&gt; [106,]          NA           NA
+#&gt; [107,]          NA           NA
+#&gt; [108,]          NA           NA
+#&gt; [109,]          NA           NA
+#&gt; [110,]          NA           NA
+#&gt; [111,]          NA           NA
+#&gt; [112,]          NA           NA
+#&gt; [113,]          NA           NA
+#&gt; [114,]          NA           NA
+#&gt; [115,]          NA           NA
+#&gt; [116,]          NA           NA
+#&gt; [117,]          NA           NA
+#&gt; [118,]          NA           NA
+#&gt; [119,]          NA           NA
+#&gt; [120,]          NA           NA
+#&gt; [121,]          NA           NA
+#&gt; [122,]          NA           NA
+#&gt; [123,]          NA           NA
+#&gt; [124,]          NA           NA
+#&gt; [125,]          NA           NA
+#&gt; [126,]          NA           NA
+#&gt; [127,]          NA           NA
+#&gt; [128,]          NA           NA
+#&gt; [129,]          NA           NA
+#&gt; [130,]          NA           NA
+#&gt; [131,]          NA           NA
+#&gt; [132,]          NA           NA
+#&gt; [133,]          NA           NA
+#&gt; [134,]          NA           NA
+#&gt; [135,]          NA           NA
+#&gt; [136,]          NA           NA
+#&gt; [137,]          NA           NA
+#&gt; [138,]          NA           NA
+#&gt; [139,]          NA           NA
+#&gt; [140,]          NA           NA
+#&gt; [141,]          NA           NA
+#&gt; [142,]          NA           NA
+#&gt; [143,]          NA           NA
+#&gt; [144,]          NA           NA
+#&gt; [145,]          NA           NA
+#&gt; [146,]          NA           NA
+#&gt; [147,]          NA           NA
+#&gt; [148,]          NA           NA
+#&gt; [149,]          NA           NA
+#&gt; [150,]          NA           NA
+#&gt; [151,]          NA           NA
+#&gt; [152,]          NA           NA
+#&gt; [153,]          NA           NA
+#&gt; [154,]          NA           NA
+#&gt; [155,]          NA           NA
+#&gt; [156,]          NA           NA
+#&gt; [157,]          NA           NA
+#&gt; [158,]          NA           NA
+#&gt; [159,]          NA           NA
+#&gt; [160,]          NA           NA
+#&gt; [161,]          NA           NA
+#&gt; [162,]          NA           NA
+#&gt; [163,]          NA           NA
+#&gt; [164,]          NA           NA
+#&gt; [165,]          NA           NA
+#&gt; [166,]          NA           NA
+#&gt; [167,]          NA           NA
+#&gt; [168,]          NA           NA
+#&gt; [169,]          NA           NA
+#&gt; [170,]          NA           NA
+#&gt; [171,]          NA           NA
+#&gt; [172,]          NA           NA
+#&gt; [173,]          NA           NA
+#&gt; [174,]          NA           NA
+#&gt; [175,]          NA           NA
+#&gt; [176,]          NA           NA
+#&gt; [177,]          NA           NA
+#&gt; [178,]          NA           NA
+#&gt; [179,]          NA           NA
+#&gt; [180,]          NA           NA
+#&gt; [181,]          NA           NA
+#&gt; [182,]          NA           NA
+#&gt; [183,]          NA           NA
+#&gt; [184,]          NA           NA
+#&gt; [185,]          NA           NA
+#&gt; [186,]          NA           NA
+#&gt; [187,]          NA           NA
+#&gt; [188,]          NA           NA
+#&gt; [189,]          NA           NA
+#&gt; [190,]          NA           NA
+#&gt; [191,]          NA           NA
+#&gt; [192,]          NA           NA
+#&gt; [193,]          NA           NA
+#&gt; [194,]          NA           NA
+#&gt; [195,]          NA           NA
+#&gt; [196,]          NA           NA
+#&gt; [197,]          NA           NA
+#&gt; [198,]          NA           NA
+#&gt; [199,]          NA           NA
+#&gt; [200,]          NA           NA
+#&gt; 
+#&gt; $df.total
+#&gt;   [1] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;   [9] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [17] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [25] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [33] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [41] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [49] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [57] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [65] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [73] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [81] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [89] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt;  [97] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [105] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [113] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [121] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [129] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [137] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [145] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [153] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [161] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [169] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [177] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [185] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; [193] 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603 8.288603
+#&gt; 
+#&gt; $p.value
+#&gt;           Intercept        Group
+#&gt;   [1,] 5.982632e-23 8.827114e-22
+#&gt;   [2,] 2.319558e-49 4.423698e-48
+#&gt;   [3,] 2.428723e-49 4.002744e-48
+#&gt;   [4,] 5.474126e-23 9.695892e-22
+#&gt;   [5,]           NA           NA
+#&gt;   [6,]           NA           NA
+#&gt;   [7,]           NA           NA
+#&gt;   [8,]           NA           NA
+#&gt;   [9,]           NA           NA
+#&gt;  [10,]           NA           NA
+#&gt;  [11,]           NA           NA
+#&gt;  [12,]           NA           NA
+#&gt;  [13,]           NA           NA
+#&gt;  [14,]           NA           NA
+#&gt;  [15,]           NA           NA
+#&gt;  [16,]           NA           NA
+#&gt;  [17,]           NA           NA
+#&gt;  [18,]           NA           NA
+#&gt;  [19,]           NA           NA
+#&gt;  [20,]           NA           NA
+#&gt;  [21,]           NA           NA
+#&gt;  [22,]           NA           NA
+#&gt;  [23,]           NA           NA
+#&gt;  [24,]           NA           NA
+#&gt;  [25,]           NA           NA
+#&gt;  [26,]           NA           NA
+#&gt;  [27,]           NA           NA
+#&gt;  [28,]           NA           NA
+#&gt;  [29,]           NA           NA
+#&gt;  [30,]           NA           NA
+#&gt;  [31,]           NA           NA
+#&gt;  [32,]           NA           NA
+#&gt;  [33,]           NA           NA
+#&gt;  [34,]           NA           NA
+#&gt;  [35,]           NA           NA
+#&gt;  [36,]           NA           NA
+#&gt;  [37,]           NA           NA
+#&gt;  [38,]           NA           NA
+#&gt;  [39,]           NA           NA
+#&gt;  [40,]           NA           NA
+#&gt;  [41,]           NA           NA
+#&gt;  [42,]           NA           NA
+#&gt;  [43,]           NA           NA
+#&gt;  [44,]           NA           NA
+#&gt;  [45,]           NA           NA
+#&gt;  [46,]           NA           NA
+#&gt;  [47,]           NA           NA
+#&gt;  [48,]           NA           NA
+#&gt;  [49,]           NA           NA
+#&gt;  [50,]           NA           NA
+#&gt;  [51,]           NA           NA
+#&gt;  [52,]           NA           NA
+#&gt;  [53,]           NA           NA
+#&gt;  [54,]           NA           NA
+#&gt;  [55,]           NA           NA
+#&gt;  [56,]           NA           NA
+#&gt;  [57,]           NA           NA
+#&gt;  [58,]           NA           NA
+#&gt;  [59,]           NA           NA
+#&gt;  [60,]           NA           NA
+#&gt;  [61,]           NA           NA
+#&gt;  [62,]           NA           NA
+#&gt;  [63,]           NA           NA
+#&gt;  [64,]           NA           NA
+#&gt;  [65,]           NA           NA
+#&gt;  [66,]           NA           NA
+#&gt;  [67,]           NA           NA
+#&gt;  [68,]           NA           NA
+#&gt;  [69,]           NA           NA
+#&gt;  [70,]           NA           NA
+#&gt;  [71,]           NA           NA
+#&gt;  [72,]           NA           NA
+#&gt;  [73,]           NA           NA
+#&gt;  [74,]           NA           NA
+#&gt;  [75,]           NA           NA
+#&gt;  [76,]           NA           NA
+#&gt;  [77,]           NA           NA
+#&gt;  [78,]           NA           NA
+#&gt;  [79,]           NA           NA
+#&gt;  [80,]           NA           NA
+#&gt;  [81,]           NA           NA
+#&gt;  [82,]           NA           NA
+#&gt;  [83,]           NA           NA
+#&gt;  [84,]           NA           NA
+#&gt;  [85,]           NA           NA
+#&gt;  [86,]           NA           NA
+#&gt;  [87,]           NA           NA
+#&gt;  [88,]           NA           NA
+#&gt;  [89,]           NA           NA
+#&gt;  [90,]           NA           NA
+#&gt;  [91,]           NA           NA
+#&gt;  [92,]           NA           NA
+#&gt;  [93,]           NA           NA
+#&gt;  [94,]           NA           NA
+#&gt;  [95,]           NA           NA
+#&gt;  [96,]           NA           NA
+#&gt;  [97,]           NA           NA
+#&gt;  [98,]           NA           NA
+#&gt;  [99,]           NA           NA
+#&gt; [100,]           NA           NA
+#&gt; [101,]           NA           NA
+#&gt; [102,]           NA           NA
+#&gt; [103,]           NA           NA
+#&gt; [104,]           NA           NA
+#&gt; [105,]           NA           NA
+#&gt; [106,]           NA           NA
+#&gt; [107,]           NA           NA
+#&gt; [108,]           NA           NA
+#&gt; [109,]           NA           NA
+#&gt; [110,]           NA           NA
+#&gt; [111,]           NA           NA
+#&gt; [112,]           NA           NA
+#&gt; [113,]           NA           NA
+#&gt; [114,]           NA           NA
+#&gt; [115,]           NA           NA
+#&gt; [116,]           NA           NA
+#&gt; [117,]           NA           NA
+#&gt; [118,]           NA           NA
+#&gt; [119,]           NA           NA
+#&gt; [120,]           NA           NA
+#&gt; [121,]           NA           NA
+#&gt; [122,]           NA           NA
+#&gt; [123,]           NA           NA
+#&gt; [124,]           NA           NA
+#&gt; [125,]           NA           NA
+#&gt; [126,]           NA           NA
+#&gt; [127,]           NA           NA
+#&gt; [128,]           NA           NA
+#&gt; [129,]           NA           NA
+#&gt; [130,]           NA           NA
+#&gt; [131,]           NA           NA
+#&gt; [132,]           NA           NA
+#&gt; [133,]           NA           NA
+#&gt; [134,]           NA           NA
+#&gt; [135,]           NA           NA
+#&gt; [136,]           NA           NA
+#&gt; [137,]           NA           NA
+#&gt; [138,]           NA           NA
+#&gt; [139,]           NA           NA
+#&gt; [140,]           NA           NA
+#&gt; [141,]           NA           NA
+#&gt; [142,]           NA           NA
+#&gt; [143,]           NA           NA
+#&gt; [144,]           NA           NA
+#&gt; [145,]           NA           NA
+#&gt; [146,]           NA           NA
+#&gt; [147,]           NA           NA
+#&gt; [148,]           NA           NA
+#&gt; [149,]           NA           NA
+#&gt; [150,]           NA           NA
+#&gt; [151,]           NA           NA
+#&gt; [152,]           NA           NA
+#&gt; [153,]           NA           NA
+#&gt; [154,]           NA           NA
+#&gt; [155,]           NA           NA
+#&gt; [156,]           NA           NA
+#&gt; [157,]           NA           NA
+#&gt; [158,]           NA           NA
+#&gt; [159,]           NA           NA
+#&gt; [160,]           NA           NA
+#&gt; [161,]           NA           NA
+#&gt; [162,]           NA           NA
+#&gt; [163,]           NA           NA
+#&gt; [164,]           NA           NA
+#&gt; [165,]           NA           NA
+#&gt; [166,]           NA           NA
+#&gt; [167,]           NA           NA
+#&gt; [168,]           NA           NA
+#&gt; [169,]           NA           NA
+#&gt; [170,]           NA           NA
+#&gt; [171,]           NA           NA
+#&gt; [172,]           NA           NA
+#&gt; [173,]           NA           NA
+#&gt; [174,]           NA           NA
+#&gt; [175,]           NA           NA
+#&gt; [176,]           NA           NA
+#&gt; [177,]           NA           NA
+#&gt; [178,]           NA           NA
+#&gt; [179,]           NA           NA
+#&gt; [180,]           NA           NA
+#&gt; [181,]           NA           NA
+#&gt; [182,]           NA           NA
+#&gt; [183,]           NA           NA
+#&gt; [184,]           NA           NA
+#&gt; [185,]           NA           NA
+#&gt; [186,]           NA           NA
+#&gt; [187,]           NA           NA
+#&gt; [188,]           NA           NA
+#&gt; [189,]           NA           NA
+#&gt; [190,]           NA           NA
+#&gt; [191,]           NA           NA
+#&gt; [192,]           NA           NA
+#&gt; [193,]           NA           NA
+#&gt; [194,]           NA           NA
+#&gt; [195,]           NA           NA
+#&gt; [196,]           NA           NA
+#&gt; [197,]           NA           NA
+#&gt; [198,]           NA           NA
+#&gt; [199,]           NA           NA
+#&gt; [200,]           NA           NA
+#&gt; 
+#&gt; $var.prior
+#&gt; [1] 36437154 36437154
+#&gt; 
+#&gt; $lods
+#&gt;        Intercept    Group
+#&gt;   [1,]  41.76277 39.09288
+#&gt;   [2,]  74.22959 71.35694
+#&gt;   [3,]  74.22957 71.35699
+#&gt;   [4,]  41.86223 38.98778
+#&gt;   [5,]        NA       NA
+#&gt;   [6,]        NA       NA
+#&gt;   [7,]        NA       NA
+#&gt;   [8,]        NA       NA
+#&gt;   [9,]        NA       NA
+#&gt;  [10,]        NA       NA
+#&gt;  [11,]        NA       NA
+#&gt;  [12,]        NA       NA
+#&gt;  [13,]        NA       NA
+#&gt;  [14,]        NA       NA
+#&gt;  [15,]        NA       NA
+#&gt;  [16,]        NA       NA
+#&gt;  [17,]        NA       NA
+#&gt;  [18,]        NA       NA
+#&gt;  [19,]        NA       NA
+#&gt;  [20,]        NA       NA
+#&gt;  [21,]        NA       NA
+#&gt;  [22,]        NA       NA
+#&gt;  [23,]        NA       NA
+#&gt;  [24,]        NA       NA
+#&gt;  [25,]        NA       NA
+#&gt;  [26,]        NA       NA
+#&gt;  [27,]        NA       NA
+#&gt;  [28,]        NA       NA
+#&gt;  [29,]        NA       NA
+#&gt;  [30,]        NA       NA
+#&gt;  [31,]        NA       NA
+#&gt;  [32,]        NA       NA
+#&gt;  [33,]        NA       NA
+#&gt;  [34,]        NA       NA
+#&gt;  [35,]        NA       NA
+#&gt;  [36,]        NA       NA
+#&gt;  [37,]        NA       NA
+#&gt;  [38,]        NA       NA
+#&gt;  [39,]        NA       NA
+#&gt;  [40,]        NA       NA
+#&gt;  [41,]        NA       NA
+#&gt;  [42,]        NA       NA
+#&gt;  [43,]        NA       NA
+#&gt;  [44,]        NA       NA
+#&gt;  [45,]        NA       NA
+#&gt;  [46,]        NA       NA
+#&gt;  [47,]        NA       NA
+#&gt;  [48,]        NA       NA
+#&gt;  [49,]        NA       NA
+#&gt;  [50,]        NA       NA
+#&gt;  [51,]        NA       NA
+#&gt;  [52,]        NA       NA
+#&gt;  [53,]        NA       NA
+#&gt;  [54,]        NA       NA
+#&gt;  [55,]        NA       NA
+#&gt;  [56,]        NA       NA
+#&gt;  [57,]        NA       NA
+#&gt;  [58,]        NA       NA
+#&gt;  [59,]        NA       NA
+#&gt;  [60,]        NA       NA
+#&gt;  [61,]        NA       NA
+#&gt;  [62,]        NA       NA
+#&gt;  [63,]        NA       NA
+#&gt;  [64,]        NA       NA
+#&gt;  [65,]        NA       NA
+#&gt;  [66,]        NA       NA
+#&gt;  [67,]        NA       NA
+#&gt;  [68,]        NA       NA
+#&gt;  [69,]        NA       NA
+#&gt;  [70,]        NA       NA
+#&gt;  [71,]        NA       NA
+#&gt;  [72,]        NA       NA
+#&gt;  [73,]        NA       NA
+#&gt;  [74,]        NA       NA
+#&gt;  [75,]        NA       NA
+#&gt;  [76,]        NA       NA
+#&gt;  [77,]        NA       NA
+#&gt;  [78,]        NA       NA
+#&gt;  [79,]        NA       NA
+#&gt;  [80,]        NA       NA
+#&gt;  [81,]        NA       NA
+#&gt;  [82,]        NA       NA
+#&gt;  [83,]        NA       NA
+#&gt;  [84,]        NA       NA
+#&gt;  [85,]        NA       NA
+#&gt;  [86,]        NA       NA
+#&gt;  [87,]        NA       NA
+#&gt;  [88,]        NA       NA
+#&gt;  [89,]        NA       NA
+#&gt;  [90,]        NA       NA
+#&gt;  [91,]        NA       NA
+#&gt;  [92,]        NA       NA
+#&gt;  [93,]        NA       NA
+#&gt;  [94,]        NA       NA
+#&gt;  [95,]        NA       NA
+#&gt;  [96,]        NA       NA
+#&gt;  [97,]        NA       NA
+#&gt;  [98,]        NA       NA
+#&gt;  [99,]        NA       NA
+#&gt; [100,]        NA       NA
+#&gt; [101,]        NA       NA
+#&gt; [102,]        NA       NA
+#&gt; [103,]        NA       NA
+#&gt; [104,]        NA       NA
+#&gt; [105,]        NA       NA
+#&gt; [106,]        NA       NA
+#&gt; [107,]        NA       NA
+#&gt; [108,]        NA       NA
+#&gt; [109,]        NA       NA
+#&gt; [110,]        NA       NA
+#&gt; [111,]        NA       NA
+#&gt; [112,]        NA       NA
+#&gt; [113,]        NA       NA
+#&gt; [114,]        NA       NA
+#&gt; [115,]        NA       NA
+#&gt; [116,]        NA       NA
+#&gt; [117,]        NA       NA
+#&gt; [118,]        NA       NA
+#&gt; [119,]        NA       NA
+#&gt; [120,]        NA       NA
+#&gt; [121,]        NA       NA
+#&gt; [122,]        NA       NA
+#&gt; [123,]        NA       NA
+#&gt; [124,]        NA       NA
+#&gt; [125,]        NA       NA
+#&gt; [126,]        NA       NA
+#&gt; [127,]        NA       NA
+#&gt; [128,]        NA       NA
+#&gt; [129,]        NA       NA
+#&gt; [130,]        NA       NA
+#&gt; [131,]        NA       NA
+#&gt; [132,]        NA       NA
+#&gt; [133,]        NA       NA
+#&gt; [134,]        NA       NA
+#&gt; [135,]        NA       NA
+#&gt; [136,]        NA       NA
+#&gt; [137,]        NA       NA
+#&gt; [138,]        NA       NA
+#&gt; [139,]        NA       NA
+#&gt; [140,]        NA       NA
+#&gt; [141,]        NA       NA
+#&gt; [142,]        NA       NA
+#&gt; [143,]        NA       NA
+#&gt; [144,]        NA       NA
+#&gt; [145,]        NA       NA
+#&gt; [146,]        NA       NA
+#&gt; [147,]        NA       NA
+#&gt; [148,]        NA       NA
+#&gt; [149,]        NA       NA
+#&gt; [150,]        NA       NA
+#&gt; [151,]        NA       NA
+#&gt; [152,]        NA       NA
+#&gt; [153,]        NA       NA
+#&gt; [154,]        NA       NA
+#&gt; [155,]        NA       NA
+#&gt; [156,]        NA       NA
+#&gt; [157,]        NA       NA
+#&gt; [158,]        NA       NA
+#&gt; [159,]        NA       NA
+#&gt; [160,]        NA       NA
+#&gt; [161,]        NA       NA
+#&gt; [162,]        NA       NA
+#&gt; [163,]        NA       NA
+#&gt; [164,]        NA       NA
+#&gt; [165,]        NA       NA
+#&gt; [166,]        NA       NA
+#&gt; [167,]        NA       NA
+#&gt; [168,]        NA       NA
+#&gt; [169,]        NA       NA
+#&gt; [170,]        NA       NA
+#&gt; [171,]        NA       NA
+#&gt; [172,]        NA       NA
+#&gt; [173,]        NA       NA
+#&gt; [174,]        NA       NA
+#&gt; [175,]        NA       NA
+#&gt; [176,]        NA       NA
+#&gt; [177,]        NA       NA
+#&gt; [178,]        NA       NA
+#&gt; [179,]        NA       NA
+#&gt; [180,]        NA       NA
+#&gt; [181,]        NA       NA
+#&gt; [182,]        NA       NA
+#&gt; [183,]        NA       NA
+#&gt; [184,]        NA       NA
+#&gt; [185,]        NA       NA
+#&gt; [186,]        NA       NA
+#&gt; [187,]        NA       NA
+#&gt; [188,]        NA       NA
+#&gt; [189,]        NA       NA
+#&gt; [190,]        NA       NA
+#&gt; [191,]        NA       NA
+#&gt; [192,]        NA       NA
+#&gt; [193,]        NA       NA
+#&gt; [194,]        NA       NA
+#&gt; [195,]        NA       NA
+#&gt; [196,]        NA       NA
+#&gt; [197,]        NA       NA
+#&gt; [198,]        NA       NA
+#&gt; [199,]        NA       NA
+#&gt; [200,]        NA       NA
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

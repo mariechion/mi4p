@@ -2,21 +2,27 @@
 % Please edit documentation in R/proj_matrix.R
 \name{proj_matrix}
 \alias{proj_matrix}
-\title{Title}
+\title{Variance-Covariance Matrix Projection}
 \usage{
 proj_matrix(VarRubin.matrix, metadata)
 }
 \arguments{
-\item{VarRubin.matrix}{}
+\item{VarRubin.matrix}{A variance-covariance matrix.}
 
-\item{metadata}{}
+\item{metadata}{Metadata of the experiment.}
 }
 \value{
-
+A list of variance-covariance matrices.
 }
 \description{
-Title
+Use a projection of the given variance-covariance matrix.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+VarRubin.matrix <- rubin2.all(datasim_imp[1:5,,],
+attr(datasim,"metadata")$Condition)
+proj_matrix(VarRubin.matrix, attr(datasim,"metadata"))
 }

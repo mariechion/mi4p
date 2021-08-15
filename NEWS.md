@@ -1,6 +1,6 @@
 # Patterns 0.5
 
-* CRAN checks improvement. 
+* CRAN checks improvement and help pages completed. 
 
 # Patterns 0.4
 

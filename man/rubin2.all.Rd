@@ -2,33 +2,40 @@
 % Please edit documentation in R/rubin2_all.R
 \name{rubin2.all}
 \alias{rubin2.all}
-\title{Title}
+\title{Computes the 2nd Rubin's rule (all peptides)}
 \usage{
 rubin2.all(
   data,
   metacond,
   funcmean = meanImp_emmeans,
   funcvar = within_variance_comp_emmeans,
-  is.parallel = FALSE
+  is.parallel = FALSE,
+  verbose = FALSE
 )
 }
 \arguments{
-\item{data}{}
+\item{data}{dataset}
 
-\item{metacond}{}
+\item{metacond}{a factor to specify the groups}
 
-\item{funcmean}{}
+\item{funcmean}{function that should be used to compute the mean}
 
-\item{funcvar}{}
+\item{funcvar}{function that should be used to compute the variance}
 
-\item{is.parallel}{}
+\item{is.parallel}{should parallel computing be used?}
+
+\item{verbose}{should messages be displayed?}
 }
 \value{
-
+List of variance-covariance matrices.
 }
 \description{
-Title
+Computes the total variance-covariance component in the 2nd Rubin's rule for all peptides.
 }
 \examples{
-1+1
+library(mi4p)
+data(datasim)
+datasim_imp <- multi.impute(data = datasim[,-1], conditions = 
+attr(datasim,"metadata")$Condition, method = "MLE")
+rubin2.all(datasim_imp[1:5,,],attr(datasim,"metadata")$Condition)
 }

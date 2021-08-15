@@ -1,19 +1,25 @@
-# Function for imputing quantitative datasets.
-
-#' Title
+#' @title Function to impute quantitative datasets
+#' 
+#' @description This function creates an array made of slices of imputed dataset. Imputation methods can be chosen from \code{c("pmm", "midastouch", 
+#' "sample", "cart", "rf", "mean", "norm", "norm.nob", "norm.boot", 
+#' "norm.predict")}.
 #'
-#' @param data 
-#' @param conditions 
-#' @param nb.imp 
-#' @param method 
-#' @param parallel 
+#' @param data Dataset to impute.
+#' @param conditions Vector with the condition values.
+#' @param nb.imp Number of imputed dataset to create.
+#' @param method Imputation method, choose from \code{c("pmm", "midastouch", 
+#' "sample", "cart", "rf", "mean", "norm", "norm.nob", "norm.boot", 
+#' "norm.predict")}.
+#' @param parallel Use parallel computing?
 #'
-#' @return
+#' @return a numeric array of dim c(dim(data),nb.imp).
 #' @export
 #'
 #' @examples
-#' 1+1
-multi.impute <- function(data, conditions, nb.imp = NULL, method, parallel = F){
+#' library(mi4p)
+#' data(datasim)
+#' multi.impute(data = datasim[,-1], conditions = attr(datasim,"metadata")$Condition, method = "MLE")
+multi.impute <- function(data, conditions, nb.imp = NULL, method, parallel = FALSE){
   conditions <- as.factor(conditions)
   # Determine the number of imputations to be done
   # Rule of thumb (White et al. 2011) : I = % MV
