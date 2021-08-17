@@ -20,12 +20,9 @@ A list of two dataframes : logFC and P_Value. The first one contains the logFC v
 Modified version of the \code{limmaCompleteTest} function from the \code{DAPAR} package to return both the fit and the results.
 }
 \examples{
-library(DAPAR)
 set.seed(2016)
-utils::data(Exp1_R25_pept, package='DAPARdata')
-obj <- Exp1_R25_pept
-qData <- Biobase::exprs(obj)
-sTab <- Biobase::pData(obj)
+data(qData)
+data(sTab)
 limma <- limmaCompleteTest.mod(qData, sTab, comp.type='OnevsOne')
 }
 \author{

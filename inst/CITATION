@@ -8,7 +8,7 @@ auth <- personList(as.person("Marie Chion"), as.person("Christine Carapito"), as
 
 citEntry(entry="Manual",
          title = titl,
-         author = personList(as.person("Marie Chion"), as.person("Christine Carapito"), as.person("Frederic Bertrand")),
+         author = personList(as.person("M. Chion"), as.person("Ch. Carapito"), as.person("F. Bertrand")),
 	 publisher = "manual",
          year         = year,
          note         = vers,
@@ -20,11 +20,14 @@ citEntry(entry="Manual",
 )
 
 citEntry(entry = "Article",
-         title = titl,
-         author = auth,
+         title = "Accounting for multiple imputation-induced variability for
+differential analysis in mass spectrometry-based label-free
+quantitative proteomics",
+         author = personList(as.person("M. Chion"), as.person("Ch. Carapito"), as.person("F. Bertrand")),
          year = 2021,
-journal="arxiv",
+journal="arxiv:2108.07086",
+         url          = "https://arxiv.org/abs/2108.07086",
          textVersion =
          paste0("M. Chion, Ch. Carapito and F. Bertrand (2021). Accounting for multiple imputation-induced variability for
 differential analysis in mass spectrometry-based label-free
-quantitative proteomics. arxiv."))
+quantitative proteomics. arxiv:2108.07086. https://arxiv.org/abs/2108.07086"))

@@ -22,13 +22,9 @@ It is not exported by DAPAR and has to be reproduced here.
 \examples{
 library(DAPAR)
 set.seed(2016)
+data(qData)
+data(sTab)
 contrast=1
-utils::data(Exp1_R25_pept, package='DAPARdata')
-obj <- Exp1_R25_pept
-qData <- Biobase::exprs(obj)[1:1000,]
-sTab <- Biobase::pData(obj)
-rownames(sTab) <- sTab$Sample.name
-colnames(qData) <-sTab$Sample.name
 sTab.old <- sTab
 conds <- factor(sTab$Condition, levels = unique(sTab$Condition))
 sTab <- sTab[unlist(lapply(split(sTab, conds), function(x) {

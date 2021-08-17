@@ -9,9 +9,6 @@ knitr::opts_chunk$set(
 )
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  install.packages("mi4p")
-
-## ---- eval = FALSE------------------------------------------------------------
 #  devtools::install_github("mariechion/mi4p")
 
 ## -----------------------------------------------------------------------------
@@ -24,6 +21,13 @@ str(datasim)
 
 ## -----------------------------------------------------------------------------
 attr(datasim, "metadata")
+
+## ---- cache=TRUE, eval=LOCAL--------------------------------------------------
+MV1pct.NA.data <- MVgen(dataset = datasim[,-1], prop_NA = 0.01)
+MV1pct.NA.data
+
+## ---- cache=TRUE, eval=LOCAL--------------------------------------------------
+MV1pct.impMLE <- multi.impute(data = MV1pct.NA.data, conditions = attr(datasim,"metadata")$Condition, method = "MLE", parallel = FALSE)
 
 ## ---- cache=TRUE, eval=LOCAL--------------------------------------------------
 print(paste(Sys.time(), "Dataset", 1, "out of", 1))

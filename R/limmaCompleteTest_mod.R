@@ -11,12 +11,9 @@
 #' @export
 #'
 #' @examples
-#' library(DAPAR)
 #' set.seed(2016)
-#' utils::data(Exp1_R25_pept, package='DAPARdata')
-#' obj <- Exp1_R25_pept
-#' qData <- Biobase::exprs(obj)
-#' sTab <- Biobase::pData(obj)
+#' data(qData)
+#' data(sTab)
 #' limma <- limmaCompleteTest.mod(qData, sTab, comp.type='OnevsOne')
 limmaCompleteTest.mod <- function (qData, sTab, comp.type = "OnevsOne") 
 {

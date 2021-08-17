@@ -13,6 +13,7 @@
 #' @param parallel Use parallel computing?
 #'
 #' @return a numeric array of dim c(dim(data),nb.imp).
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 #' @export
 #'
 #' @examples

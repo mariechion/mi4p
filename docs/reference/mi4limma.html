@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mi4p</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
       </span>
     </div>
 
@@ -170,16 +170,23 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>M. Chion, Ch. Carapito and F. Bertrand (2021). <em>Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics</em>. arxiv:2108.07086. <a href='https://arxiv.org/abs/2108.07086'>https://arxiv.org/abs/2108.07086</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#' library(DAPAR)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
-<span class='fu'>utils</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Exp1_R25_pept</span>, package<span class='op'>=</span><span class='st'>'DAPARdata'</span><span class='op'>)</span>
-<span class='va'>obj</span> <span class='op'>&lt;-</span> <span class='va'>Exp1_R25_pept</span>
-<span class='va'>qData</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/exprs.html'>exprs</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>
-<span class='va'>sTab</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/phenoData.html'>pData</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>)</span>
 <span class='va'>fit.limma</span> <span class='op'>&lt;-</span> <span class='fu'>mi4limma</span><span class='op'>(</span><span class='va'>qData</span>, <span class='va'>sTab</span>, <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Partial NA coefficients for 1020 probe(s)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: More than half of residual variances are exactly zero: eBayes unreliable</span></div></pre>
+</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'quantmod':</span>
+#&gt; <span class='message'>  method            from</span>
+#&gt; <span class='message'>  as.zoo.data.frame zoo </span></div><div class='output co'>#&gt; <span class='warning'>Warning: mzR has been built against a different Rcpp version (1.0.6)</span>
+#&gt; <span class='warning'>than is installed on your system (1.0.7). This might lead to errors</span>
+#&gt; <span class='warning'>when loading mzR. If you encounter such issues, please send a report,</span>
+#&gt; <span class='warning'>including the output of sessionInfo() to the Bioc support forum at </span>
+#&gt; <span class='warning'>https://support.bioconductor.org/. For details see also</span>
+#&gt; <span class='warning'>https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Partial NA coefficients for 32 probe(s)</span></div><div class='output co'>#&gt; <span class='warning'>Warning: More than half of residual variances are exactly zero: eBayes unreliable</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

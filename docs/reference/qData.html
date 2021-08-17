@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple Imputation Within Variance Component — within_variance_comp_emmeans • mi4p</title>
+<title>Extract of the abundances of Exp1_R25_pept dataset — qData • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Multiple Imputation Within Variance Component — within_variance_comp_emmeans" />
-<meta property="og:description" content="Computes the multiple imputation within variance component using the emmeans package." />
+<meta property="og:title" content="Extract of the abundances of Exp1_R25_pept dataset — qData" />
+<meta property="og:description" content="The data frame qData contains the first 500 rows of six columns that are the quantitation of peptides for the six replicates. They were obtained using the code exprs(Exp1_R25_pept)[1:500,]." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mi4p</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
       </span>
     </div>
 
@@ -131,55 +131,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple Imputation Within Variance Component</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/within_variance_comp_emmeans.R'><code>R/within_variance_comp_emmeans.R</code></a></small>
-    <div class="hidden name"><code>within_variance_comp_emmeans.Rd</code></div>
+    <h1>Extract of the abundances of Exp1_R25_pept dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
+    <div class="hidden name"><code>qData.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Computes the multiple imputation within variance component using the emmeans package.</p>
+    <p>The data frame <code>qData</code> contains the first 500 rows of six columns that are the quantitation of peptides for the six replicates. They were obtained using the code <code>exprs(Exp1_R25_pept)[1:500,]</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>within_variance_comp_emmeans</span><span class='op'>(</span><span class='va'>ind</span>, <span class='va'>peptide</span>, <span class='va'>data</span>, <span class='va'>metacond</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ind</th>
-      <td><p>index</p></td>
-    </tr>
-    <tr>
-      <th>peptide</th>
-      <td><p>name of the peptide</p></td>
-    </tr>
-    <tr>
-      <th>data</th>
-      <td><p>dataset</p></td>
-    </tr>
-    <tr>
-      <th>metacond</th>
-      <td><p>a factor to specify the groups</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A variance-covariance matrix.</p>
+    <p>The format is: num [1:500, 1:6] 24.8 24.7 24.6 NA 24.5 ...  -
+attr(*, "dimnames")=List of 2 ..$ : chr [1:500] "0" "1" "2" "3" ...  ..$ :
+chr [1:6] "Intensity_C_R1" "Intensity_C_R2" "Intensity_C_R3"
+"Intensity_D_R1" ...</p>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>The <code>DAPARdata</code> package.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>DAPARdata</code>'s <code>Exp1_R25_pept</code> dataset is the final outcome of a quantitative mass spectrometry-based proteomic analysis of two samples containing different concentrations of 48 human proteins (UPS1 standard from Sigma-Aldrich) within a constant yeast background (see Giai Gianetto et al. (2016) for details). It contains the abundance values of the different human and yeast peptides identified and quantified in these two conditions. The two conditions represent the measured abundances of peptides when respectively 25 fmol and 10 fmol of UPS1 human proteins were mixed with the yeast extract before mass spectrometry analyses. This results in a concentration ratio of 2.5. Three technical replicates were acquired for each condition.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>M. Chion, Ch. Carapito and F. Bertrand (2021). <em>Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics</em>. arxiv:2108.07086. <a href='https://arxiv.org/abs/2108.07086'>https://arxiv.org/abs/2108.07086</a>.</p>
+    <p>Cox J., Hein M.Y., Luber C.A., Paron I., Nagaraj N., Mann M. Accurate proteome-wide label-free quantification by delayed normalization and maximal peptide ratio extraction, termed MaxLFQ. Mol Cell Proteomics. 2014 Sep, 13(9):2513-26.</p>
+<p>Giai Gianetto, Q., Combes, F., Ramus, C., Bruley, C., Coute, Y., Burger, T. (2016). Calibration plot for proteomics: A graphical tool to visually check the assumptions underlying FDR control in quantitative experiments. Proteomics, 16(1), 29-32.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://mariechion.github.io/mi4p/'>mi4p</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>datasim</span><span class='op'>)</span>
-<span class='va'>datasim_imp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='multi.impute.html'>multi.impute</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>datasim</span><span class='op'>[</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, conditions <span class='op'>=</span> 
-<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span>, method <span class='op'>=</span> <span class='st'>"MLE"</span><span class='op'>)</span>
-<span class='fu'>within_variance_comp_emmeans</span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='va'>datasim_imp</span>,
-<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>datasim</span>,<span class='st'>"metadata"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Condition</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;           [,1]      [,2]
-#&gt; [1,] 0.1911347 0.0000000
-#&gt; [2,] 0.0000000 0.1911347</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  num [1:500, 1:6] 24.8 24.7 24.6 NA 24.5 ...
+#&gt;  - attr(*, "dimnames")=List of 2
+#&gt;   ..$ : chr [1:500] "0" "1" "2" "3" ...
+#&gt;   ..$ : chr [1:6] "Intensity_C_R1" "Intensity_C_R2" "Intensity_C_R3" "Intensity_D_R1" ...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/pairs.html'>pairs</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span>
+</div><div class='img'><img src='qData-1.png' alt='' width='700' height='433' /></div><div class='input'> 
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

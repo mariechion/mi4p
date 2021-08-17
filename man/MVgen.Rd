@@ -23,3 +23,6 @@ data(datasim)
 datasim_amp <- MVgen(datasim, .2)
 sum(is.na(datasim_amp))/prod(dim(datasim_amp))
 }
+\references{
+M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+}

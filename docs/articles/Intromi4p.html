@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mi4p</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@
                         <h4 class="author">Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, <a href="mailto:frederic.bertrand@utt.fr" class="email">frederic.bertrand@utt.fr</a>
 </h4>
             
-            <h4 class="date">2021-08-16</h4>
+            <h4 class="date">2021-08-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mariechion/mi4p/blob/master/vignettes/Intromi4p.Rmd"><code>vignettes/Intromi4p.Rmd</code></a></small>
       <div class="hidden name"><code>Intromi4p.Rmd</code></div>
@@ -114,8 +114,8 @@
 <div id="mi4p-multiple-imputation-for-proteomics" class="section level1">
 <h1 class="hasAnchor">
 <a href="#mi4p-multiple-imputation-for-proteomics" class="anchor"></a>mi4p: multiple imputation for proteomics</h1>
-<p>This vignette is an introduciton to the <code>mi4p</code> R package (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand. The package is dedicated to dealing with multiple imputation for proteomics.</p>
-<p>The following material is available on thr Github repository of the package (<a href="https://github.com/mariechion/mi4p/" class="uri">https://github.com/mariechion/mi4p/</a>).</p>
+<p>This repository contains the R code and package for the <em>mi4p</em> methodology (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand (2021) in <em>Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics</em>, <a href="https://arxiv.org/abs/2108.07086">https://arxiv.org/abs/2108.07086</a>.</p>
+<p>The following material is available on the Github repository of the package <a href="https://github.com/mariechion/mi4p/">https://github.com/mariechion/mi4p/</a>.</p>
 <ol style="list-style-type: decimal">
 <li><p>The <code>Functions</code> folder contains all the functions used for the workflow.</p></li>
 <li><p>The <code>Simulation-1</code>, <code>Simulation-2</code> and <code>Simulation-3</code> folders contain all the R scripts and data used to conduct simulated experiments and evaluate our methodology.</p></li>
@@ -125,11 +125,15 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of mi4p from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mi4p"</span><span class="op">)</span></code></pre></div>
+<!-- You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
+
+
+```r
+install.packages("mi4p")
+```
+-->
 <p>You can install the development version of mi4p from <a href="https://github.com">github</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mariechion/mi4p"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="examples" class="section level2">
@@ -138,9 +142,9 @@
 <div id="first-section" class="section level3">
 <h3 class="hasAnchor">
 <a href="#first-section" class="anchor"></a>First section</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mariechion.github.io/mi4p/">mi4p</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">4619</span><span class="op">)</span>
 <span class="va">datasim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/protdatasim.html">protdatasim</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">datasim</span><span class="op">)</span>
@@ -160,7 +164,7 @@
 <span class="co">#&gt;   ..$ Sample.name: chr [1:10] "X1" "X2" "X3" "X4" ...</span>
 <span class="co">#&gt;   ..$ Condition  : Factor w/ 2 levels "A","B": 1 1 1 1 1 2 2 2 2 2</span>
 <span class="co">#&gt;   ..$ Bio.Rep    : int [1:10] 1 2 3 4 5 6 7 8 9 10</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span>
 <span class="co">#&gt;    Sample.name Condition Bio.Rep</span>
 <span class="co">#&gt; 1           X1         A       1</span>
@@ -179,7 +183,7 @@
 <h2 class="hasAnchor">
 <a href="#amputation" class="anchor"></a>AMPUTATION</h2>
 <!-- Use `eval=LOCAL` to prevent testing too long computation during CRAN checks.-->
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.NA.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MVgen.html">MVgen</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">datasim</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, prop_NA <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 <span class="va">MV1pct.NA.data</span>
 <span class="co">#&gt;            X1        X2        X3        X4        X5        X6        X7</span>
@@ -588,23 +592,23 @@
 <div id="imputation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#imputation" class="anchor"></a>IMPUTATION</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multi.impute.html">multi.impute</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">MV1pct.NA.data</span>, conditions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>,<span class="st">"metadata"</span><span class="op">)</span><span class="op">$</span><span class="va">Condition</span>, method <span class="op">=</span> <span class="st">"MLE"</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#estimation" class="anchor"></a>ESTIMATION</h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"Dataset"</span>, <span class="fl">1</span>, <span class="st">"out of"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2021-08-15 14:53:26 Dataset 1 out of 1"</span>
+<span class="co">#&gt; [1] "2021-08-17 16:03:28 Dataset 1 out of 1"</span>
 <span class="va">MV1pct.impMLE.VarRubin.Mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rubin2.all.html">rubin2.all</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">MV1pct.impMLE</span>, metacond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">$</span><span class="va">Condition</span><span class="op">)</span> </code></pre></div>
 </div>
 <div id="projection" class="section level2">
 <h2 class="hasAnchor">
 <a href="#projection" class="anchor"></a>PROJECTION</h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Dataset"</span>, <span class="fl">1</span>, <span class="st">"out of"</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Dataset 1 out of 1 2021-08-15 14:54:18"</span>
+<span class="co">#&gt; [1] "Dataset 1 out of 1 2021-08-17 16:04:18"</span>
 <span class="va">MV1pct.impMLE.VarRubin.S2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span>, <span class="kw">function</span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">{</span>
     <span class="va">DesMat</span> <span class="op">=</span> <span class="fu">DAPAR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DAPAR/man/make.design.html">make.design</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">%*%</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">DesMat</span><span class="op">)</span><span class="op">%*%</span><span class="va">DesMat</span><span class="op">)</span><span class="op">)</span>
@@ -622,7 +626,7 @@
 <div id="moderated-t-test" class="section level2">
 <h2 class="hasAnchor">
 <a href="#moderated-t-test" class="anchor"></a>MODERATED T-TEST</h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.mi4limma.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mi4limma.html">mi4limma</a></span><span class="op">(</span>qData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span>, 
                  sTab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span>, 
                  VarRubin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.S2</span><span class="op">)</span><span class="op">)</span>
@@ -1053,14 +1057,14 @@
 <span class="co">#&gt; [169] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</span>
 <span class="co">#&gt; [181] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</span></code></pre></div>
 <p>True positive rate</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">simplify2array</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.mi4limma.res</span><span class="op">)</span><span class="op">$</span><span class="va">P_Value.A_vs_B_pval</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">&lt;=</span><span class="fl">0.05</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span>
 <span class="co">#&gt; [1] 1</span></code></pre></div>
 <p>False positive rate</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">simplify2array</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.mi4limma.res</span><span class="op">)</span><span class="op">$</span><span class="va">P_Value.A_vs_B_pval</span><span class="op">)</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">200</span><span class="op">]</span><span class="op">&lt;=</span><span class="fl">0.05</span><span class="op">)</span><span class="op">/</span><span class="fl">190</span>
 <span class="co">#&gt; [1] 0.05789474</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.dapar.res</span> <span class="op">&lt;-</span><span class="fu"><a href="../reference/limmaCompleteTest.mod.html">limmaCompleteTest.mod</a></span><span class="op">(</span>qData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span>, sTab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">MV1pct.impMLE.dapar.res</span>
 <span class="co">#&gt; $res.l</span>
@@ -1498,12 +1502,12 @@
 <span class="co">#&gt; [185] 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841</span>
 <span class="co">#&gt; [193] 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841 1.017841</span></code></pre></div>
 <p>Simulate a list of 100 datasets.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">4619</span><span class="op">)</span>
 <span class="va">norm.200.m100.sd1.vs.m200.sd1.list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="va">protdatasim</span><span class="op">)</span>
 <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">norm.200.m100.sd1.vs.m200.sd1.list</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,<span class="st">"metadata"</span><span class="op">)</span></code></pre></div>
 <p>100 datasets with parallel comuting support. Quite long to run even with parallel computing support.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach">foreach</a></span><span class="op">)</span>
 <span class="fu">doParallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html">registerDoParallel</a></span><span class="op">(</span>cores<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"foreach"</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -1511,7 +1515,7 @@
 <div id="amputation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#amputation-1" class="anchor"></a>AMPUTATION</h2>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.NA.data</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>iforeach <span class="op">=</span>  <span class="va">norm.200.m100.sd1.vs.m200.sd1.list</span>,
                           .errorhandling <span class="op">=</span> <span class="st">'stop'</span>, .verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%dopar%</span> 
   <span class="fu"><a href="../reference/MVgen.html">MVgen</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">iforeach</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, prop_NA <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
@@ -1519,7 +1523,7 @@
 <div id="imputation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#imputation-1" class="anchor"></a>IMPUTATION</h2>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>iforeach <span class="op">=</span>  <span class="va">MV1pct.NA.data</span>,
                          .errorhandling <span class="op">=</span> <span class="st">'stop'</span>, .verbose <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%dopar%</span> 
   <span class="fu"><a href="../reference/multi.impute.html">multi.impute</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">iforeach</span>, conditions <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">Condition</span>, 
@@ -1528,7 +1532,7 @@
 <div id="estimation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#estimation-1" class="anchor"></a>ESTIMATION</h2>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.VarRubin.Mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">index</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"Dataset"</span>, <span class="va">index</span>, <span class="st">"out of"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="../reference/rubin2.all.html">rubin2.all</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">MV1pct.impMLE</span><span class="op">[[</span><span class="va">index</span><span class="op">]</span><span class="op">]</span>, metacond <span class="op">=</span> <span class="va">metadata</span><span class="op">$</span><span class="va">Condition</span><span class="op">)</span> 
@@ -1537,7 +1541,7 @@
 <div id="projection-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#projection-1" class="anchor"></a>PROJECTION</h2>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.VarRubin.S2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">id.dataset</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Dataset"</span>, <span class="va">id.dataset</span>, <span class="st">"out of"</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">[[</span><span class="va">id.dataset</span><span class="op">]</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">{</span>
@@ -1549,7 +1553,7 @@
 <div id="moderated-t-test-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#moderated-t-test-1" class="anchor"></a>MODERATED T-TEST</h2>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.mi4limma.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html">foreach</a></span><span class="op">(</span>iforeach <span class="op">=</span>  <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,  .errorhandling <span class="op">=</span> <span class="st">'stop'</span>, .verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%dopar%</span>
   <span class="fu"><a href="../reference/mi4limma.html">mi4limma</a></span><span class="op">(</span>qData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE</span><span class="op">[[</span><span class="va">iforeach</span><span class="op">]</span><span class="op">]</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span>, 
                  sTab <span class="op">=</span> <span class="va">metadata</span>, 

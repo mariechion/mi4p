@@ -167,14 +167,11 @@
     <p>Adapted from Hélène Borges, Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.prostar-proteomics.org/'>DAPAR</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
-<span class='fu'>utils</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Exp1_R25_pept</span>, package<span class='op'>=</span><span class='st'>'DAPARdata'</span><span class='op'>)</span>
-<span class='va'>obj</span> <span class='op'>&lt;-</span> <span class='va'>Exp1_R25_pept</span>
-<span class='va'>qData</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/exprs.html'>exprs</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>
-<span class='va'>sTab</span> <span class='op'>&lt;-</span> <span class='fu'>Biobase</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/Biobase/man/phenoData.html'>pData</a></span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2016</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>qData</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>sTab</span><span class='op'>)</span>
 <span class='va'>limma</span> <span class='op'>&lt;-</span> <span class='fu'>limmaCompleteTest.mod</span><span class='op'>(</span><span class='va'>qData</span>, <span class='va'>sTab</span>, comp.type<span class='op'>=</span><span class='st'>'OnevsOne'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Partial NA coefficients for 1020 probe(s)</span></div></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Partial NA coefficients for 32 probe(s)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

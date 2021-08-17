@@ -28,9 +28,9 @@ knitr::opts_chunk$set(
 <!--[![DOI](https://zenodo.org/badge/18441799.svg)](https://zenodo.org/badge/latestdoi/18441799)-->
 <!-- badges: end -->
 
-This repository contains the R code and package for the _mi4p_ methodology (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand. 
+This repository contains the R code and package for the _mi4p_ methodology (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand (2021) in *Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics*, [https://arxiv.org/abs/2108.07086](https://arxiv.org/abs/2108.07086). 
 
-The following material is available on thr Gthub repository of the package (https://github.com/mariechion/mi4p/).
+The following material is available on the Github repository of the package [https://github.com/mariechion/mi4p/](https://github.com/mariechion/mi4p/).
 
 1. The `Functions` folder contains all the functions used for the workflow.  
 

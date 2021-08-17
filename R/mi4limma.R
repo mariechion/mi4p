@@ -7,15 +7,13 @@
 #' @param robust logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances? (as in limma's eBayes)
 #'
 #' @return A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 #' @export
 #'
 #' @examples
-#' #' library(DAPAR)
 #' set.seed(2016)
-#' utils::data(Exp1_R25_pept, package='DAPARdata')
-#' obj <- Exp1_R25_pept
-#' qData <- Biobase::exprs(obj)
-#' sTab <- Biobase::pData(obj)
+#' data(qData)
+#' data(sTab)
 #' fit.limma <- mi4limma(qData, sTab, diag(1,2))
 mi4limma <- function (qData, sTab, VarRubin, comp.type = "OnevsOne", robust = FALSE) 
 {

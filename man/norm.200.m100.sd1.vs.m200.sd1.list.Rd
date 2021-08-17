@@ -1111,7 +1111,7 @@ str(norm.200.m100.sd1.vs.m200.sd1.list)
 
 }
 \references{
-arxiv preprint.
+M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 }
 \author{
 M. Chion, Ch. Carapito and F. Bertrand.

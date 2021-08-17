@@ -39,3 +39,6 @@ datasim_imp <- multi.impute(data = datasim[,-1], conditions =
 attr(datasim,"metadata")$Condition, method = "MLE")
 rubin2.all(datasim_imp[1:5,,],attr(datasim,"metadata")$Condition)
 }
+\references{
+M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+}

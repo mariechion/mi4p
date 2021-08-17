@@ -21,7 +21,7 @@
 #' \item{X10}{a numeric vector} 
 #' }
 #' @author M. Chion, Ch. Carapito and F. Bertrand.
-#' @references arxiv preprint.
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 #' @source We simulated the data.
 #' @keywords datasets
 #' @examples
@@ -1130,7 +1130,7 @@ NULL
 #' w/ 2 levels "A","B": 1 1 1 1 1 2 2 2 2 2 .. ..$ Bio.Rep : int [1:10] 1 2 3 4
 #' 5 6 7 8 9 10 [list output truncated]
 #' @author M. Chion, Ch. Carapito and F. Bertrand.
-#' @references arxiv preprint.
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 #' @source We simulated the data.
 #' @keywords datasets
 #' @examples
@@ -1139,3 +1139,58 @@ NULL
 #' str(norm.200.m100.sd1.vs.m200.sd1.list)
 #' 
 NULL
+
+#' Extract of the abundances of Exp1_R25_pept dataset
+#' 
+#' The data frame \code{qData} contains the first 500 rows of six columns that are the quantitation of peptides for the six replicates. They were obtained using the code \code{exprs(Exp1_R25_pept)[1:500,]}.
+#' 
+#' The \code{DAPARdata}'s \code{Exp1_R25_pept} dataset is the final outcome of a quantitative mass spectrometry-based proteomic analysis of two samples containing different concentrations of 48 human proteins (UPS1 standard from Sigma-Aldrich) within a constant yeast background (see Giai Gianetto et al. (2016) for details). It contains the abundance values of the different human and yeast peptides identified and quantified in these two conditions. The two conditions represent the measured abundances of peptides when respectively 25 fmol and 10 fmol of UPS1 human proteins were mixed with the yeast extract before mass spectrometry analyses. This results in a concentration ratio of 2.5. Three technical replicates were acquired for each condition.
+#' 
+#' @name qData
+#' @docType data
+#' @format The format is: num [1:500, 1:6] 24.8 24.7 24.6 NA 24.5 ...  -
+#' attr(*, "dimnames")=List of 2 ..$ : chr [1:500] "0" "1" "2" "3" ...  ..$ :
+#' chr [1:6] "Intensity_C_R1" "Intensity_C_R2" "Intensity_C_R3"
+#' "Intensity_D_R1" ...
+#' @references 
+#' Cox J., Hein M.Y., Luber C.A., Paron I., Nagaraj N., Mann M. Accurate proteome-wide label-free quantification by delayed normalization and maximal peptide ratio extraction, termed MaxLFQ. Mol Cell Proteomics. 2014 Sep, 13(9):2513-26.
+#' 
+#' Giai Gianetto, Q., Combes, F., Ramus, C., Bruley, C., Coute, Y., Burger, T. (2016). Calibration plot for proteomics: A graphical tool to visually check the assumptions underlying FDR control in quantitative experiments. Proteomics, 16(1), 29-32.
+#' @source The \code{DAPARdata} package.
+#' @keywords datasets
+#' @examples
+#' 
+#' data(qData)
+#' str(qData)
+#' pairs(qData)
+#'  
+NULL
+
+
+#' Experimental design for the Exp1_R25_pept dataset
+#' 
+#' The data frame \code{sTab}  contains the experimental design and gives few informations about the samples. They were obtained using the code \code{pData(Exp1_R25_pept)}.
+#' 
+#' The \code{DAPARdata}'s \code{Exp1_R25_pept} dataset is the final outcome of a quantitative mass spectrometry-based proteomic analysis of two samples containing different concentrations of 48 human proteins (UPS1 standard from Sigma-Aldrich) within a constant yeast background (see Giai Gianetto et al. (2016) for details). It contains the abundance values of the different human and yeast peptides identified and quantified in these two conditions. The two conditions represent the measured abundances of peptides when respectively 25 fmol and 10 fmol of UPS1 human proteins were mixed with the yeast extract before mass spectrometry analyses. This results in a concentration ratio of 2.5. Three technical replicates were acquired for each condition.
+#' 
+#' @name sTab
+#' @docType data
+#' @format A data frame with 6 observations on the following 3 variables.
+#' \describe{ 
+#' \item{Sample.name}{a character vector}
+#' \item{Condition}{a character vector} 
+#' \item{Bio.Rep}{a numeric vector} 
+#' }
+#' @references
+#' Cox J., Hein M.Y., Luber C.A., Paron I., Nagaraj N., Mann M. Accurate proteome-wide label-free quantification by delayed normalization and maximal peptide ratio extraction, termed MaxLFQ. Mol Cell Proteomics. 2014 Sep, 13(9):2513-26.
+#' 
+#' Giai Gianetto, Q., Combes, F., Ramus, C., Bruley, C., Coute, Y., Burger, T. (2016). Calibration plot for proteomics: A graphical tool to visually check the assumptions underlying FDR control in quantitative experiments. Proteomics, 16(1), 29-32.
+#' @source The \code{DAPARdata} package.
+#' @keywords datasets
+#' @examples
+#' 
+#' data(sTab)
+#' str(sTab)
+#' 
+NULL
+
