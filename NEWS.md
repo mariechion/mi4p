@@ -1,3 +1,7 @@
+# mi4p 0.7
+
+* Added ‘ctb’ roles in the ‘Authors@R’ field and a ‘Copyright’ field that is referring to an inst/COPYRIGHTS file to pass the first package assessment from CRAN. A contact entry was also added to the DESCRIPTION file.
+
 # mi4p 0.6
 
 * Further CRAN checks improvement, two examples dataset added. 

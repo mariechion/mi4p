@@ -52,7 +52,7 @@ The matrices t, p.value and lods have the same dimensions as the input object fi
 s2.prior, df.prior and var.prior contain empirical Bayes hyperparameters used to obtain df.total, s2.post and lods.
 }
 \description{
-Modified eBayes function to be used instead of the one in the limma package
+Modified eBayes function to be used instead of the one, \code{.ebayes}, implemented in the limma package
 }
 \examples{
 library(mi4p)

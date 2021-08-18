@@ -1,6 +1,6 @@
 #' @title MI-aware Modifed eBayes Function
 #' 
-#' @description Modified eBayes function to be used instead of the one in the limma package
+#' @description Modified eBayes function to be used instead of the one, \code{.ebayes}, implemented in the limma package
 #'
 #' @param fit an MArrayLM fitted model object produced by lmFit or contrasts.fit. For ebayes only, fit can alternatively be an unclassed list produced by lm.series, gls.series or mrlm containing components coefficients, stdev.unscaled, sigma and df.residual.
 #' @param VarRubin a variance-covariance matrix.
