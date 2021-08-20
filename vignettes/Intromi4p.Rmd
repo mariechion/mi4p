@@ -52,13 +52,11 @@ This website and these examples were created by M. Chion, C. Carapito and F. Ber
 
 ## Installation
 
-<!-- You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
-
+You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
 
 ```r
 install.packages("mi4p")
 ```
--->
 
 You can install the development version of mi4p from [github](https://github.com) with:
 

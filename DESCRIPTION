@@ -38,7 +38,7 @@ License: GPL (>= 2)
 Copyright: See the file COPYRIGHTS
 Encoding: UTF-8
 Classification/MSC: 62J05, 62J07, 62J99, 92C42
-VignetteBuilder: knitr
+VignetteBuilder: rmarkdown
 RoxygenNote: 7.1.1
 URL: https://mariechion.github.io/mi4p/, https://github.com/mariechion/mi4p/
 BugReports: https://github.com/mariechion/mi4p/issues/
