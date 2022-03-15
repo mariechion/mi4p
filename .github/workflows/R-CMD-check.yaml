@@ -45,4 +45,5 @@ jobs:
         with:
           extra-packages: rcmdcheck, prettydoc
       - uses: r-lib/actions/check-r-package@v2
+        error-on: error
       
