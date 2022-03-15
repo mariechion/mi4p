@@ -18,6 +18,7 @@ Suggests:
     knitr,
     R.rsp,
     markdown,
+    prettydoc,
     rmarkdown
 Authors@R: c(
 	person(given = "Marie", family= "Chion", role = c("aut"), email = "mariechion@protonmail.com", comment = c(ORCID = "0000-0001-8956-8388")),
