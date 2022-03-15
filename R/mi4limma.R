@@ -30,9 +30,9 @@ mi4limma <- function (qData, sTab, VarRubin, comp.type = "OnevsOne", robust = FA
   }))]
   conds <- conds[order(conds)]
   res.l <- NULL
-  design.matrix <- DAPAR::make.design(sTab)
+  design.matrix <- mi4p::make.design(sTab)
   if (!is.null(design.matrix)) {
-    contra <- DAPAR::make.contrast(design.matrix, condition = conds, 
+    contra <- mi4p::make.contrast(design.matrix, condition = conds, 
                             contrast)
     cmtx <- limma::makeContrasts(contrasts = contra, levels = make.names(colnames(design.matrix)))
     fit <- eBayes.mod(limma::contrasts.fit(limma::lmFit(qData, 

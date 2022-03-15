@@ -36,7 +36,7 @@ MV1pct.impMLE.VarRubin.Mat <- rubin2.all(data = MV1pct.impMLE, metacond = attr(d
 ## ---- cache=TRUE, eval=LOCAL--------------------------------------------------
 print(paste("Dataset", 1, "out of",1, Sys.time()))
 MV1pct.impMLE.VarRubin.S2 <- as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat, function(aaa){
-    DesMat = DAPAR::make.design(attr(datasim, "metadata"))
+    DesMat = mi4p::make.design(attr(datasim, "metadata"))
     return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
   }))
 
@@ -90,7 +90,7 @@ metadata <- attr(norm.200.m100.sd1.vs.m200.sd1.list[[1]],"metadata")
 #  MV1pct.impMLE.VarRubin.S2 <- lapply(1:length(MV1pct.impMLE.VarRubin.Mat), function(id.dataset){
 #    print(paste("Dataset", id.dataset, "out of",length(MV1pct.impMLE.VarRubin.Mat), Sys.time()))
 #    as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat[[id.dataset]], function(aaa){
-#      DesMat = DAPAR::make.design(metadata)
+#      DesMat = mi4p::make.design(metadata)
 #      return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
 #    }))
 #  })

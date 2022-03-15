@@ -1,6 +1,7 @@
 # mi4p 0.8
 
 * Additional fixes to code and help files.
+* Code modifications as DAPAR is to be removed from Bioconductor. Will be reversed as soon as the problem with DAPAR is solved.
 
 # mi4p 0.7
 

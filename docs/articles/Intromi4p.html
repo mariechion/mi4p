@@ -97,7 +97,7 @@
                         <h4 class="author">Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, <a href="mailto:frederic.bertrand@utt.fr" class="email">frederic.bertrand@utt.fr</a>
 </h4>
             
-            <h4 class="date">2021-08-20</h4>
+            <h4 class="date">2022-03-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mariechion/mi4p/blob/master/vignettes/Intromi4p.Rmd"><code>vignettes/Intromi4p.Rmd</code></a></small>
       <div class="hidden name"><code>Intromi4p.Rmd</code></div>
@@ -130,7 +130,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mi4p"</span><span class="op">)</span></code></pre></div>
 <p>You can install the development version of mi4p from <a href="https://github.com">github</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mariechion/mi4p"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mariechion/mi4p"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -596,7 +596,7 @@
 <a href="#estimation" class="anchor"></a>ESTIMATION</h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"Dataset"</span>, <span class="fl">1</span>, <span class="st">"out of"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "2021-08-20 18:58:51 Dataset 1 out of 1"</span>
+<span class="co">#&gt; [1] "2022-03-15 01:19:47 Dataset 1 out of 1"</span>
 <span class="va">MV1pct.impMLE.VarRubin.Mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rubin2.all.html">rubin2.all</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">MV1pct.impMLE</span>, metacond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">$</span><span class="va">Condition</span><span class="op">)</span> </code></pre></div>
 </div>
 <div id="projection" class="section level2">
@@ -604,20 +604,11 @@
 <a href="#projection" class="anchor"></a>PROJECTION</h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Dataset"</span>, <span class="fl">1</span>, <span class="st">"out of"</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Dataset 1 out of 1 2021-08-20 19:02:08"</span>
+<span class="co">#&gt; [1] "Dataset 1 out of 1 2022-03-15 01:20:34"</span>
 <span class="va">MV1pct.impMLE.VarRubin.S2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span>, <span class="kw">function</span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">DesMat</span> <span class="op">=</span> <span class="fu">DAPAR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DAPAR/man/make.design.html">make.design</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">DesMat</span> <span class="op">=</span> <span class="fu">mi4p</span><span class="fu">::</span><span class="fu"><a href="../reference/make.design.html">make.design</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">datasim</span>, <span class="st">"metadata"</span><span class="op">)</span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">%*%</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">DesMat</span><span class="op">)</span><span class="op">%*%</span><span class="va">DesMat</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span>
-<span class="co">#&gt;   method            from</span>
-<span class="co">#&gt;   as.zoo.data.frame zoo</span>
-<span class="co">#&gt; Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.6)</span>
-<span class="co">#&gt; than is installed on your system (1.0.7). This might lead to errors</span>
-<span class="co">#&gt; when loading mzR. If you encounter such issues, please send a report,</span>
-<span class="co">#&gt; including the output of sessionInfo() to the Bioc support forum at </span>
-<span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
-<span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span></code></pre></div>
+  <span class="op">}</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="moderated-t-test" class="section level2">
 <h2 class="hasAnchor">
@@ -1541,7 +1532,7 @@
 <code class="sourceCode R"><span class="va">MV1pct.impMLE.VarRubin.S2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">id.dataset</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Dataset"</span>, <span class="va">id.dataset</span>, <span class="st">"out of"</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">MV1pct.impMLE.VarRubin.Mat</span><span class="op">[[</span><span class="va">id.dataset</span><span class="op">]</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">{</span>
-    <span class="va">DesMat</span> <span class="op">=</span> <span class="fu">DAPAR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DAPAR/man/make.design.html">make.design</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span>
+    <span class="va">DesMat</span> <span class="op">=</span> <span class="fu">mi4p</span><span class="fu">::</span><span class="fu"><a href="../reference/make.design.html">make.design</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">aaa</span><span class="op">)</span><span class="op">%*%</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">DesMat</span><span class="op">)</span><span class="op">%*%</span><span class="va">DesMat</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>

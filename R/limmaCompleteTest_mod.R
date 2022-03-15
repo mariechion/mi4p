@@ -30,9 +30,9 @@ limmaCompleteTest.mod <- function (qData, sTab, comp.type = "OnevsOne")
   }))]
   conds <- conds[order(conds)]
   res.l <- NULL
-  design.matrix <- DAPAR::make.design(sTab)
+  design.matrix <- mi4p::make.design(sTab)
   if (!is.null(design.matrix)) {
-    contra <- DAPAR::make.contrast(design.matrix, condition = conds, 
+    contra <- mi4p::make.contrast(design.matrix, condition = conds, 
                             contrast)
     cmtx <- limma::makeContrasts(contrasts = contra, levels = make.names(colnames(design.matrix)))
     fit <- limma::eBayes(limma::contrasts.fit(limma::lmFit(qData, 

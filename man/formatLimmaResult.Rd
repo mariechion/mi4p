@@ -20,7 +20,7 @@ A list of two dataframes : logFC and P_Value. The first one contains the logFC v
 It is not exported by DAPAR and has to be reproduced here.
 }
 \examples{
-library(DAPAR)
+# library(DAPAR)
 set.seed(2016)
 data(qData)
 data(sTab)
@@ -35,8 +35,8 @@ qData <- qData[, unlist(lapply(split(sTab.old, conds), function(x) {
 }))]
 conds <- conds[order(conds)]
 res.l <- NULL
-design.matrix <- DAPAR::make.design(sTab)
-contra <- DAPAR::make.contrast(design.matrix, condition = conds, 
+design.matrix <- mi4p::make.design(sTab)
+contra <- mi4p::make.contrast(design.matrix, condition = conds, 
                                  contrast)
 cmtx <- limma::makeContrasts(contrasts = contra, levels = make.names(colnames(design.matrix)))
 fit <- limma::eBayes(limma::contrasts.fit(limma::lmFit(qData, 
