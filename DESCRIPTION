@@ -1,8 +1,8 @@
 Package: mi4p
 Type: Package
 Title: Multiple Imputation for Proteomics
-Version: 0.8
-Date: 2022-03-14
+Version: 0.91
+Date: 2022-05-11
 Depends: R (>= 3.5.0)
 biocViews:
 Imports: 
@@ -19,7 +19,8 @@ Suggests:
     R.rsp,
     markdown,
     prettydoc,
-    rmarkdown
+    rmarkdown,
+    ProteoMM
 Authors@R: c(
 	person(given = "Marie", family= "Chion", role = c("aut"), email = "mariechion@protonmail.com", comment = c(ORCID = "0000-0001-8956-8388")),
 	person(given = "Christine", family= "Carapito", role = c("aut"), email = "ccarapito@unistra.fr", comment = c(ORCID = "0000-0002-0079-319X")),
