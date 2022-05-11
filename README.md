@@ -49,8 +49,6 @@ devtools::install_github("mariechion/mi4p")
 
 ## Examples
 
-### First section
-
 
 ```r
 library(mi4p)
@@ -79,7 +77,7 @@ str(datasim)
 #>   ..$ Bio.Rep    : int [1:10] 1 2 3 4 5 6 7 8 9 10
 ```
 
-It s the dataset shipped with package.
+It is the dataset shipped with package.
 
 ```r
 save(datasim, file="datasim.RData", compress = "xz")
@@ -133,7 +131,7 @@ MV1pct.impMLE <- multi.impute(data = MV1pct.NA.data, conditions = attr(datasim,"
 
 ```r
 print(paste(Sys.time(), "Dataset", 1, "out of", 1))
-#> [1] "2021-08-12 01:38:43 Dataset 1 out of 1"
+#> [1] "2022-05-11 15:27:11 Dataset 1 out of 1"
 MV1pct.impMLE.VarRubin.Mat <- rubin2.all(data = MV1pct.impMLE, metacond = attr(datasim, "metadata")$Condition) 
 ```
 
@@ -141,7 +139,7 @@ MV1pct.impMLE.VarRubin.Mat <- rubin2.all(data = MV1pct.impMLE, metacond = attr(d
 
 ```r
 print(paste("Dataset", 1, "out of",1, Sys.time()))
-#> [1] "Dataset 1 out of 1 2022-05-11 14:41:23"
+#> [1] "Dataset 1 out of 1 2022-05-11 15:28:42"
 MV1pct.impMLE.VarRubin.S2 <- as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat, function(aaa){
     DesMat = mi4p::make.design(attr(datasim, "metadata"))
     return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
@@ -303,7 +301,9 @@ MV1pct.impMLE.dapar.res <- foreach(iforeach =  1:100,  .errorhandling = 'stop', 
 Complimentary useful tests
 
 ## TESTING FOR ABSENCE/PRESENCE WITH GTEST
-As in the package follows the analysis described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009).
+
+The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009).
+
 
 ```r
 library(ProteoMM)
@@ -342,5 +342,21 @@ qData[rownames(res.g.test[res.g.test[,2]<0.05,]),]
 #> 389       21.93693       22.03093
 ```
 
+The `eigen_pi` function of the `ProteoMM` Bioconductor package computes the proportion of observations missing completely at random. It is used by the `g.test` function if such an estimate is to be computed using the data
+.
 
+```r
+library(ProteoMM)
+data(mm_peptides)
+intsCols = 8:13
+metaCols = 1:7
+m_Ints = mm_peptides[, intsCols]
+m_prot.info = mm_peptides[, metaCols]
+m_logInts = m_Ints
+m_logInts[m_Ints==0] = NA
+m_logInts = log2(m_logInts)
+my.pi = ProteoMM::eigen_pi(m_logInts, toplot=TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="100%" />
 
