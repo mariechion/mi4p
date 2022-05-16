@@ -1,14 +1,35 @@
-#' The mi4p Package
+#' mi4p: Multiple imputation for proteomics
 #' 
-#' A multiple imputation framework ...
+#' Imputing missing values is common practice in label-free quantitative 
+#' proteomics. Imputation replaces a missing value by a user-defined one. 
+#' However, the imputation itself is not optimally considered downstream of the
+#' imputation process. In particular, imputed datasets are considered as if 
+#' they had always been complete. The uncertainty due to the imputation is not 
+#' properly taken into account. Hence, the mi4p package provides a more 
+#' accurate statistical analysis of multiple-imputed datasets. A rigorous 
+#' multiple imputation methodology is implemented, leading to a less biased 
+#' estimation of parameters and their variability thanks to Rubin’s rules. The
+#' imputation-based peptide’s intensities’ variance estimator is then moderated 
+#' using Bayesian hierarchical models. This estimator is finally included in 
+#' moderated t-test statistics to provide differential analyses results.
 #' 
 #' @docType package
 #' @name mi4p-package
 #' @aliases mi4p-package mi4p
-#' @author This package has been written by Marie Chion, Christine Carapito and Frederic Bertrand. 
+#' @author This package has been written by Marie Chion, Christine Carapito and 
+#' Frederic Bertrand.  
 #' Maintainer: <frederic.bertrand@@utt.fr>
 #' 
-#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+#' @references 
+#' M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple 
+#' imputation-induced variability for differential analysis in mass 
+#' spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. 
+#' \url{https://arxiv.org/abs/2108.07086}.
+#' 
+#' M. Chion, Ch. Carapito, F. Bertrand. Towards a more accurate differential 
+#' analysis of multiple imputed proteomics data with mi4limma. Statistical 
+#' Analysis of Proteomic Data: Methods and Tools, 2022. hal-03442944
+#' \url{https://hal.archives-ouvertes.fr/hal-03442944}
 #' 
 #' @keywords package
 #' 
