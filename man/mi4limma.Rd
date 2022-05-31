@@ -2,26 +2,39 @@
 % Please edit documentation in R/mi4limma.R
 \name{mi4limma}
 \alias{mi4limma}
-\title{Title}
+\title{Differential analysis after multiple imputation}
 \usage{
 mi4limma(qData, sTab, VarRubin, comp.type = "OnevsOne", robust = FALSE)
 }
 \arguments{
-\item{qData}{A matrix of quantitative data, without any missing values.}
+\item{qData}{A matrix of quantitative data, without any missing values. It 
+should be the averaged matrix from the array resulting from 
+\code{\link{multi.impute}}.}
 
-\item{sTab}{The data.frame which correspond to the pData function of MSnbase}
+\item{sTab}{The experimental matrix, also corresponding to the pData function 
+of MSnbase.}
 
-\item{VarRubin}{A variance-covariance matrix}
+\item{VarRubin}{A numerical vector, resulting from \code{\link{proj_matrix}}.
+It denotes the vector of projected variance-covariance matrices. It should be
+of length the number of peptides or proteins considered.}
 
-\item{comp.type}{A string that corresponds to the type of comparison. Values are: 'anova1way', 'OnevsOne' and 'OnevsAll'; default is 'OnevsOne'.}
+\item{comp.type}{A string that corresponds to the type of comparison. Values 
+are: 'anova1way', 'OnevsOne' and 'OnevsAll'; default is 'OnevsOne'.}
 
-\item{robust}{logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances? (as in limma's eBayes)}
+\item{robust}{logical, should the estimation of df.prior and var.prior be 
+robustified against outlier sample variances? (as in limma's eBayes)}
 }
 \value{
-A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
+A list of two dataframes : logFC and P_Value. The first one contains 
+the logFC values of all the comparisons (one column for one comparison), the 
+second one contains the pvalue of all the comparisons (one column for one 
+comparison). The names of the columns for those two dataframes are identical 
+and correspond to the description of the comparison.
 }
 \description{
-Title
+This function performs hierarchical differential analysis using a moderated 
+t-test statistic, which accounts for multiple imputation variability if 
+applicable.
 }
 \examples{
 set.seed(2016)
@@ -30,5 +43,12 @@ data(sTab)
 fit.limma <- mi4limma(qData, sTab, diag(1,2))
 }
 \references{
-M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting 
+for multiple imputation-induced variability for differential analysis in 
+mass spectrometry-based label-free quantitative proteomics}. 
+arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+}
+\author{
+Adapted by Marie Chion, from \code{\link[DAPAR]{limmaCompleteTest}} by 
+Hélène Borges, Thomas Burger, Quentin Giai-Gianetto and Samuel Wieczorek.
 }

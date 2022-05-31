@@ -7,7 +7,8 @@
 rubin1.one(peptide, data, funcmean = meanImp_emmeans, metacond)
 }
 \arguments{
-\item{peptide}{peptide for which the variance-covariance matrix should be derived.}
+\item{peptide}{peptide for which the variance-covariance matrix should be 
+derived.}
 
 \item{data}{dataset}
 
@@ -30,5 +31,11 @@ rubin1.one(1,datasim_imp,funcmean = meanImp_emmeans,
 attr(datasim,"metadata")$Condition)
 }
 \references{
-M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting 
+for multiple imputation-induced variability for differential analysis in mass
+spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. 
+\url{https://arxiv.org/abs/2108.07086}.
+}
+\author{
+Frédéric Bertrand
 }

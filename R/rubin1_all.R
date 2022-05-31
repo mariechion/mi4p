@@ -1,14 +1,18 @@
-#' @title First Rubin rule (all peptide)
+#' @title First Rubin rule (all peptides)
 #' 
-#' @description Computes the first Rubin's rule for all the peptide.
+#' @description Computes the first Rubin's rule for all the peptides.
 #'
 #' @param data dataset
 #' @param metacond a factor to specify the groups
 #' @param funcmean function that should be used to compute the mean
-#' @param is.parallel should parallel computing be used?
-#' @param verbose should messages be displayed?
+#' @param is.parallel Logical, whether or not use parallel computing
+#' (with \code{\link[foreach]{foreach}}).
+#' @param verbose Logical, should messages be displayed?
 #'
 #' @return A vector of estimated parameters.
+#' 
+#' @author Frédéric Bertrand
+#' 
 #' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 #' @export
 #'

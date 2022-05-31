@@ -26,7 +26,7 @@ A numeric array of dimension c(dim(data),nb.imp).
 }
 \description{
 \code{\link{multi.impute}} performs multiple imputation on a
-given quantitative dataset.
+given quantitative proteomics dataset.
 }
 \details{
 Multiple imputation consists in imputing several times a given

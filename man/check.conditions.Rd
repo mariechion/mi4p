@@ -13,7 +13,11 @@ check.conditions(conds)
 A list
 }
 \description{
-This function check the validity of the conditions
+This function checks the validity of the conditions.
+
+This function was included from the \code{\link[DAPAR]{check.conditions}} 
+function in the DAPAR package, since DAPAR is to be removed from 
+Bioconductor >= 3.15.
 }
 \examples{
 \dontrun{
@@ -23,6 +27,6 @@ check.conditions(Biobase::pData(Exp1_R25_pept)$Condition)
 
 }
 \author{
-Samuel Wieczorek originally in the DAPAR package. Included in this 
-package since DAPAR is to be removed from Bioconductor >= 3.15.
+Samuel Wieczorek as the author of 
+\code{\link[DAPAR]{check.conditions}}.
 }
