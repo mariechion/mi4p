@@ -309,12 +309,11 @@ The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Te
 library(ProteoMM)
 ProteoMM::g.test(c(TRUE, TRUE, FALSE, FALSE), as.factor(c('grp1', 'grp1', 'grp2', 'grp2')))
 #> 
-#> 	Log likelihood ratio/G test of independence without
-#> 	correction
+#> 	Log likelihood ratio/G test of independence without correction
 #> 
 #> data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))
-#> Log likelihood ratio statistic (G) = 5.5452, X-squared df =
-#> 1, p-value = 0.01853
+#> Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,
+#> p-value = 0.01853
 data("qData")
 data("sTab")
 tableNA.qData <- apply(is.na(qData),1,table,sTab$Condition)

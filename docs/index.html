@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mi4p</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.91</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -371,12 +371,11 @@ framework for protein quantitation in bottom-up MS based proteomics``
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ProteoMM</span><span class="op">)</span>
 <span class="fu">ProteoMM</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ProteoMM/man/g.test.html">g.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'grp1'</span>, <span class="st">'grp1'</span>, <span class="st">'grp2'</span>, <span class="st">'grp2'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Log likelihood ratio/G test of independence without</span>
-<span class="co">#&gt;  correction</span>
+<span class="co">#&gt;  Log likelihood ratio/G test of independence without correction</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))</span>
-<span class="co">#&gt; Log likelihood ratio statistic (G) = 5.5452, X-squared df =</span>
-<span class="co">#&gt; 1, p-value = 0.01853</span>
+<span class="co">#&gt; Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,</span>
+<span class="co">#&gt; p-value = 0.01853</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"qData"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sTab"</span><span class="op">)</span>
 <span class="va">tableNA.qData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">qData</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">table</span>,<span class="va">sTab</span><span class="op">$</span><span class="va">Condition</span><span class="op">)</span>

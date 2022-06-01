@@ -1,5 +1,6 @@
-# mi4p 0.91
+# mi4p 1.0
 
+* updated documentation
 * added g.test from ProteoMM in the readme to test for absence/presence
 
 # mi4p 0.9

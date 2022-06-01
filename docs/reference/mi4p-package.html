@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The mi4p Package — mi4p-package • mi4p</title>
+<title>mi4p: Multiple imputation for proteomics — mi4p-package • mi4p</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,19 @@
 
 
 
-<meta property="og:title" content="The mi4p Package — mi4p-package" />
-<meta property="og:description" content="A multiple imputation framework ..." />
+<meta property="og:title" content="mi4p: Multiple imputation for proteomics — mi4p-package" />
+<meta property="og:description" content="Imputing missing values is common practice in label-free quantitative 
+proteomics. Imputation replaces a missing value by a user-defined one. 
+However, the imputation itself is not optimally considered downstream of the
+imputation process. In particular, imputed datasets are considered as if 
+they had always been complete. The uncertainty due to the imputation is not 
+properly taken into account. Hence, the mi4p package provides a more 
+accurate statistical analysis of multiple-imputed datasets. A rigorous 
+multiple imputation methodology is implemented, leading to a less biased 
+estimation of parameters and their variability thanks to Rubin’s rules. The
+imputation-based peptide’s intensities’ variance estimator is then moderated 
+using Bayesian hierarchical models. This estimator is finally included in 
+moderated t-test statistics to provide differential analyses results." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mi4p</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
@@ -131,23 +142,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The mi4p Package</h1>
+    <h1>mi4p: Multiple imputation for proteomics</h1>
     <small class="dont-index">Source: <a href='https://github.com/mariechion/mi4p/blob/master/R/mi4p-package.R'><code>R/mi4p-package.R</code></a></small>
     <div class="hidden name"><code>mi4p-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A multiple imputation framework ...</p>
+    <p>Imputing missing values is common practice in label-free quantitative 
+proteomics. Imputation replaces a missing value by a user-defined one. 
+However, the imputation itself is not optimally considered downstream of the
+imputation process. In particular, imputed datasets are considered as if 
+they had always been complete. The uncertainty due to the imputation is not 
+properly taken into account. Hence, the mi4p package provides a more 
+accurate statistical analysis of multiple-imputed datasets. A rigorous 
+multiple imputation methodology is implemented, leading to a less biased 
+estimation of parameters and their variability thanks to Rubin’s rules. The
+imputation-based peptide’s intensities’ variance estimator is then moderated 
+using Bayesian hierarchical models. This estimator is finally included in 
+moderated t-test statistics to provide differential analyses results.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>M. Chion, Ch. Carapito and F. Bertrand (2021). <em>Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics</em>. arxiv:2108.07086. <a href='https://arxiv.org/abs/2108.07086'>https://arxiv.org/abs/2108.07086</a>.</p>
+    <p>M. Chion, Ch. Carapito and F. Bertrand (2021). <em>Accounting for multiple 
+imputation-induced variability for differential analysis in mass 
+spectrometry-based label-free quantitative proteomics</em>. arxiv:2108.07086. 
+<a href='https://arxiv.org/abs/2108.07086'>https://arxiv.org/abs/2108.07086</a>.</p>
+<p>M. Chion, Ch. Carapito, F. Bertrand. Towards a more accurate differential 
+analysis of multiple imputed proteomics data with mi4limma. Statistical 
+Analysis of Proteomic Data: Methods and Tools, 2022. hal-03442944
+<a href='https://hal.archives-ouvertes.fr/hal-03442944'>https://hal.archives-ouvertes.fr/hal-03442944</a></p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>This package has been written by Marie Chion, Christine Carapito and Frederic Bertrand. 
+    <p>This package has been written by Marie Chion, Christine Carapito and 
+Frederic Bertrand.  
 Maintainer: &lt;frederic.bertrand@utt.fr&gt;</p>
 
   </div>
