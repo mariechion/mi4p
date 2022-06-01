@@ -2,7 +2,7 @@
 % Please edit documentation in R/rubin1_all.R
 \name{rubin1.all}
 \alias{rubin1.all}
-\title{First Rubin rule (all peptide)}
+\title{First Rubin rule (all peptides)}
 \usage{
 rubin1.all(
   data,
@@ -19,15 +19,16 @@ rubin1.all(
 
 \item{funcmean}{function that should be used to compute the mean}
 
-\item{is.parallel}{should parallel computing be used?}
+\item{is.parallel}{Logical, whether or not use parallel computing
+(with \code{\link[foreach]{foreach}}).}
 
-\item{verbose}{should messages be displayed?}
+\item{verbose}{Logical, should messages be displayed?}
 }
 \value{
 A vector of estimated parameters.
 }
 \description{
-Computes the first Rubin's rule for all the peptide.
+Computes the first Rubin's rule for all the peptides.
 }
 \examples{
 library(mi4p)
@@ -39,4 +40,7 @@ attr(datasim,"metadata")$Condition)
 }
 \references{
 M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+}
+\author{
+Frédéric Bertrand
 }

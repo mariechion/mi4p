@@ -13,7 +13,11 @@ check.design(sTab)
 A boolean
 }
 \description{
-This function check the validity of the experimental design
+This function checks the validity of the experimental design.
+
+This function was included from the \code{\link[DAPAR]{check.design}} 
+function in the DAPAR package, since DAPAR is to be removed from 
+Bioconductor >= 3.15.
 }
 \examples{
 \dontrun{
@@ -23,7 +27,6 @@ check.design(Biobase::pData(Exp1_R25_pept)[,1:3])
 
 }
 \author{
-Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek originally in 
-the DAPAR package. Included in this package since DAPAR is to be removed from 
-Bioconductor >= 3.15.
+Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek as 
+the authors of \code{\link[DAPAR]{check.design}}.
 }

@@ -1,13 +1,18 @@
-#' This function check the validity of the conditions
-#' 
 #' @title Check if the design is valid
+#' 
+#' @description 
+#' This function checks the validity of the conditions.
+#' 
+#' This function was included from the \code{\link[DAPAR]{check.conditions}} 
+#' function in the DAPAR package, since DAPAR is to be removed from 
+#' Bioconductor >= 3.15. 
 #' 
 #' @param conds A vector
 #' 
 #' @return A list
 #' 
-#' @author Samuel Wieczorek originally in the DAPAR package. Included in this 
-#' package since DAPAR is to be removed from Bioconductor >= 3.15. 
+#' @author Samuel Wieczorek as the author of 
+#' \code{\link[DAPAR]{check.conditions}}.
 #' 
 #' @examples
 #' \dontrun{
