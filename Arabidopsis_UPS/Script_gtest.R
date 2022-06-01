@@ -37,19 +37,19 @@ head(res.g.test)
 
 
 ## Perform g-test after "our" filtering criterion
-## At least 1 quantified value in each condition
-peptidesMQ_filter<-peptidesMQ[which(apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point1",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point2",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point3",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point4",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point5",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point6",colnames(peptidesMQ))]),1,sum)<3
-                                   & apply(is.na(peptidesMQ[,grep(pattern = "Intensity.Point7",colnames(peptidesMQ))]),1,sum)<3),]
-# 14492 peptides (8633 peptides removed)
 ## Remove reverse peptide sequences and contaminants.
-peptidesMQ_filter<-subset(peptidesMQ_filter, subset = peptidesMQ_filter$Reverse!="+" & 
-                           peptidesMQ_filter$Potential.contaminant!="+")
-# 14321 peptides (171 peptides removed)
+peptidesMQ_filter<-subset(peptidesMQ, subset = peptidesMQ$Reverse!="+" & 
+                            peptidesMQ$Potential.contaminant!="+")
+# 22829 peptides (296 peptides were removed)
+## At least 1 quantified value in each condition
+peptidesMQ_filter<-peptidesMQ_filter[which(apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point1",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point2",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point3",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point4",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point5",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point6",colnames(peptidesMQ_filter))]),1,sum)<3
+                                   & apply(is.na(peptidesMQ_filter[,grep(pattern = "Intensity.Point7",colnames(peptidesMQ_filter))]),1,sum)<3),]
+# 14321 peptides (8508 peptides removed)
 ## Define the quantitative data matrix
 qData.f = peptidesMQ_filter[,grep(pattern = "Intensity.",colnames(peptidesMQ_filter))]
 ## For each peptide, get a table counting missing values by condition.
