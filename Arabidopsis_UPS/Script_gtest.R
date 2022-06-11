@@ -116,13 +116,13 @@ length(grep("HUMAN",rownames(res.g.test[p.res.g.test<0.05,])))
 
 p.adjust(p.res.g.test, method = "BH")
 sum(p.adjust(p.res.g.test, method = "BH")<0.05)
-#0 after correction for multiple tests
+#488 after correction for multiple tests
 
 length(grep("ARATH",rownames(res.g.test[p.adjust(p.res.g.test, method = "BH")<0.05,])))
 # 280 peptides ARATH found significant by raw g.test
 
 length(grep("HUMAN",rownames(res.g.test[p.adjust(p.res.g.test, method = "BH")<0.05,])))
-# 208 peptides HUMAN found significant by g.test corrected for multiple tests
+# 208 peptides HUMAN found significant by raw g.test corrected for multiple tests
 
 #-> corrected g.test found significant 280/208=1.35 ARATH than HUMAN
 # g.test increases false positives. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
