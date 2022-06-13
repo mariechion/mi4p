@@ -112,7 +112,7 @@ length(grep("HUMAN",rownames(res.g.test[p.res.g.test<0.05,])))
 # 445 peptides HUMAN found significant by g.test corrected for multiple tests
 
 #-> raw g.test found significant 1767/445=3.97 ARATH than HUMAN
-# g.test increases false positives. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
+# hybrid method with g.test will decrease precision. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
 
 p.adjust(p.res.g.test, method = "BH")
 sum(p.adjust(p.res.g.test, method = "BH")<0.05)
@@ -125,7 +125,7 @@ length(grep("HUMAN",rownames(res.g.test[p.adjust(p.res.g.test, method = "BH")<0.
 # 208 peptides HUMAN found significant by raw g.test corrected for multiple tests
 
 #-> corrected g.test found significant 280/208=1.35 ARATH than HUMAN
-# g.test increases false positives. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
+# hybrid method with g.test will decrease precision. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
 
 
 nrow((res.g.test[res.g.test[p.res.g.test<0.05,1],])[rownames(res.g.test[res.g.test[p.res.g.test<0.05,1],]) %in% names(tableNA.qData.f),])
@@ -138,7 +138,7 @@ length(grep("HUMAN",rownames((res.g.test[res.g.test[p.res.g.test<0.05,1],])[rown
 # After filtering 8 peptides HUMAN found significant by g.test corrected for multiple tests
 
 #-> raw g.test found significant 76/8=9.5 ARATH than HUMAN
-# g.test increases false positives. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
+# hybrid method with g.test will decrease precision. Need for an adapted g.test for specific experimental designs such as the ones than we analyzed.
 
 #No significant peptides for corrected g.test after filtering.
 

@@ -198,7 +198,7 @@ Complimentary useful tests
 
 ## TESTING FOR ABSENCE/PRESENCE WITH GTEST
 
-The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009).
+The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009). For some experimental designs of experiments, this test may be used to look for significant peptides based on their absence/presence. For some designs, it will decrease the precision of out methodology, see the arabidopsis example on github.
 
 ```{r}
 library(ProteoMM)
