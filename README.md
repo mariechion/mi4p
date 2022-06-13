@@ -302,18 +302,24 @@ Complimentary useful tests
 
 ## TESTING FOR ABSENCE/PRESENCE WITH GTEST
 
-The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009).
+The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009). For some experimental designs of experiments, this test may be used to look for significant peptides based on their absence/presence. For some designs, it will decrease the precision of out methodology, see the arabidopsis example on github.
 
 
 ```r
 library(ProteoMM)
+#> 
+#> Attachement du package : 'ProteoMM'
+#> Les objets suivants sont masqués depuis 'package:mi4p':
+#> 
+#>     eigen_pi, g.test
 ProteoMM::g.test(c(TRUE, TRUE, FALSE, FALSE), as.factor(c('grp1', 'grp1', 'grp2', 'grp2')))
 #> 
-#> 	Log likelihood ratio/G test of independence without correction
+#> 	Log likelihood ratio/G test of independence
+#> 	without correction
 #> 
 #> data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))
-#> Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,
-#> p-value = 0.01853
+#> Log likelihood ratio statistic (G) = 5.5452,
+#> X-squared df = 1, p-value = 0.01853
 data("qData")
 data("sTab")
 tableNA.qData <- apply(is.na(qData),1,table,sTab$Condition)
@@ -329,16 +335,16 @@ res.g.test[res.g.test[,2]<0.05,]
 #> 105                     105 0.003925917
 #> 389                     389 0.003925917
 qData[rownames(res.g.test[res.g.test[,2]<0.05,]),]
-#>     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3 Intensity_D_R1
-#> 29        23.18826       22.74154       22.94633             NA
-#> 44              NA             NA             NA       25.83019
-#> 105       26.52709       26.37171       26.63201             NA
-#> 389             NA             NA             NA       22.20932
-#>     Intensity_D_R2 Intensity_D_R3
-#> 29              NA             NA
-#> 44        25.98796       26.03095
-#> 105             NA             NA
-#> 389       21.93693       22.03093
+#>     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3
+#> 29        23.18826       22.74154       22.94633
+#> 44              NA             NA             NA
+#> 105       26.52709       26.37171       26.63201
+#> 389             NA             NA             NA
+#>     Intensity_D_R1 Intensity_D_R2 Intensity_D_R3
+#> 29              NA             NA             NA
+#> 44        25.83019       25.98796       26.03095
+#> 105             NA             NA             NA
+#> 389       22.20932       21.93693       22.03093
 ```
 
 The `eigen_pi` function of the `ProteoMM` Bioconductor package computes the proportion of observations missing completely at random. It is used by the `g.test` function if such an estimate is to be computed using the data

@@ -366,16 +366,25 @@ with parallel computing support.</p>
 <p>The <code>g.test</code> function of the<code>ProteoMM</code>
 Bioconductor package, implements the G-Test described in “A statistical
 framework for protein quantitation in bottom-up MS based proteomics``
-(Karpievitch et al. Bioinformatics 2009).</p>
+(Karpievitch et al. Bioinformatics 2009). For some experimental designs
+of experiments, this test may be used to look for significant peptides
+based on their absence/presence. For some designs, it will decrease the
+precision of out methodology, see the arabidopsis example on github.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ProteoMM</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attachement du package : 'ProteoMM'</span>
+<span class="co">#&gt; Les objets suivants sont masqués depuis 'package:mi4p':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     eigen_pi, g.test</span>
 <span class="fu">ProteoMM</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ProteoMM/man/g.test.html">g.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'grp1'</span>, <span class="st">'grp1'</span>, <span class="st">'grp2'</span>, <span class="st">'grp2'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;  Log likelihood ratio/G test of independence without correction</span>
+<span class="co">#&gt;  Log likelihood ratio/G test of independence</span>
+<span class="co">#&gt;  without correction</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))</span>
-<span class="co">#&gt; Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,</span>
-<span class="co">#&gt; p-value = 0.01853</span>
+<span class="co">#&gt; Log likelihood ratio statistic (G) = 5.5452,</span>
+<span class="co">#&gt; X-squared df = 1, p-value = 0.01853</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"qData"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sTab"</span><span class="op">)</span>
 <span class="va">tableNA.qData</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">qData</span><span class="op">)</span>,<span class="fl">1</span>,<span class="va">table</span>,<span class="va">sTab</span><span class="op">$</span><span class="va">Condition</span><span class="op">)</span>
@@ -391,16 +400,16 @@ framework for protein quantitation in bottom-up MS based proteomics``
 <span class="co">#&gt; 105                     105 0.003925917</span>
 <span class="co">#&gt; 389                     389 0.003925917</span>
 <span class="va">qData</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">res.g.test</span><span class="op">[</span><span class="va">res.g.test</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">&lt;</span><span class="fl">0.05</span>,<span class="op">]</span><span class="op">)</span>,<span class="op">]</span>
-<span class="co">#&gt;     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3 Intensity_D_R1</span>
-<span class="co">#&gt; 29        23.18826       22.74154       22.94633             NA</span>
-<span class="co">#&gt; 44              NA             NA             NA       25.83019</span>
-<span class="co">#&gt; 105       26.52709       26.37171       26.63201             NA</span>
-<span class="co">#&gt; 389             NA             NA             NA       22.20932</span>
-<span class="co">#&gt;     Intensity_D_R2 Intensity_D_R3</span>
-<span class="co">#&gt; 29              NA             NA</span>
-<span class="co">#&gt; 44        25.98796       26.03095</span>
-<span class="co">#&gt; 105             NA             NA</span>
-<span class="co">#&gt; 389       21.93693       22.03093</span></code></pre></div>
+<span class="co">#&gt;     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3</span>
+<span class="co">#&gt; 29        23.18826       22.74154       22.94633</span>
+<span class="co">#&gt; 44              NA             NA             NA</span>
+<span class="co">#&gt; 105       26.52709       26.37171       26.63201</span>
+<span class="co">#&gt; 389             NA             NA             NA</span>
+<span class="co">#&gt;     Intensity_D_R1 Intensity_D_R2 Intensity_D_R3</span>
+<span class="co">#&gt; 29              NA             NA             NA</span>
+<span class="co">#&gt; 44        25.83019       25.98796       26.03095</span>
+<span class="co">#&gt; 105             NA             NA             NA</span>
+<span class="co">#&gt; 389       22.20932       21.93693       22.03093</span></code></pre></div>
 <p>The <code>eigen_pi</code> function of the <code>ProteoMM</code>
 Bioconductor package computes the proportion of observations missing
 completely at random. It is used by the <code>g.test</code> function if
