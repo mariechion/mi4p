@@ -1,8 +1,8 @@
 Package: mi4p
 Type: Package
 Title: Multiple Imputation for Proteomics
-Version: 1.0
-Date: 2022-06-01
+Version: 1.1
+Date: 2023-03-23
 Depends: R (>= 3.5.0)
 biocViews:
 Imports: 
@@ -41,6 +41,6 @@ Copyright: See the file COPYRIGHTS
 Encoding: UTF-8
 Classification/MSC: 62J05, 62J07, 62J99, 92C42
 VignetteBuilder: knitr
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 URL: https://mariechion.github.io/mi4p/, https://github.com/mariechion/mi4p/
 BugReports: https://github.com/mariechion/mi4p/issues/

@@ -4,11 +4,11 @@ titl <- meta$Title
 titl <- "mi4p: multiple imputation for proteomics"
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
-auth <- personList(as.person("Marie Chion"), as.person("Christine Carapito"), as.person("Frederic Bertrand"))
+auth <- c(person(given="Marie", family="Chion"), person(given="Christine", family="Carapito"), person(given="Frederic", family="Bertrand"))
 
-citEntry(entry="Manual",
+bibentry(bibtype="Manual",
          title = titl,
-         author = personList(as.person("M. Chion"), as.person("Ch. Carapito"), as.person("F. Bertrand")),
+         author = c(person(given="Marie", family="Chion"), person(given="Christine", family="Carapito"), person(given="Frederic", family="Bertrand")),
 	 publisher = "manual",
          year         = year,
          note         = vers,
@@ -19,11 +19,11 @@ citEntry(entry="Manual",
                )
 )
 
-citEntry(entry = "Article",
+bibentry(bibtype = "Article",
          title = "Accounting for multiple imputation-induced variability for
 differential analysis in mass spectrometry-based label-free
 quantitative proteomics",
-         author = personList(as.person("M. Chion"), as.person("Ch. Carapito"), as.person("F. Bertrand")),
+         author = c(person(given="Marie", family="Chion"), person(given="Christine", family="Carapito"), person(given="Frederic", family="Bertrand")),
          year = 2021,
 journal="arxiv:2108.07086",
          url          = "https://arxiv.org/abs/2108.07086",
