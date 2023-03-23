@@ -1,13 +1,13 @@
 #' @title Format a Result from Limma
 #' 
-#' @description It is not exported by DAPAR and has to be reproduced here.
+#' @description It is not exported by \code{DAPAR} and has to be reproduced here.
 #' 
 #' @param fit Limma fit
 #' @param conds Condition vector
 #' @param contrast Contrast vector
 #'
 #' @return A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
-#' @author Adapted from the code of Samuel Wieczorek in the DAPAR package as it is an object that is not exported by the DAPAR package.
+#' @author Adapted from the code of Samuel Wieczorek in the \code{DAPAR} package as it is an object that is not exported by the \code{DAPAR} package.
 #' @export
 #'
 #' @examples

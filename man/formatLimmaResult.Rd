@@ -17,7 +17,7 @@ formatLimmaResult(fit, conds, contrast)
 A list of two dataframes : logFC and P_Value. The first one contains the logFC values of all the comparisons (one column for one comparison), the second one contains the pvalue of all the comparisons (one column for one comparison). The names of the columns for those two dataframes are identical and correspond to the description of the comparison.
 }
 \description{
-It is not exported by DAPAR and has to be reproduced here.
+It is not exported by \code{DAPAR} and has to be reproduced here.
 }
 \examples{
 # library(DAPAR)
@@ -44,5 +44,5 @@ fit <- limma::eBayes(limma::contrasts.fit(limma::lmFit(qData,
 res.l <- mi4p::formatLimmaResult(fit, conds, contrast)
 }
 \author{
-Adapted from the code of Samuel Wieczorek in the DAPAR package as it is an object that is not exported by the DAPAR package.
+Adapted from the code of Samuel Wieczorek in the \code{DAPAR} package as it is an object that is not exported by the \code{DAPAR} package.
 }

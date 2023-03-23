@@ -49,6 +49,7 @@ mass spectrometry-based label-free quantitative proteomics}.
 arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
 }
 \author{
-Adapted by Marie Chion, from \code{\link[DAPAR]{limmaCompleteTest}} by 
-Hélène Borges, Thomas Burger, Quentin Giai-Gianetto and Samuel Wieczorek.
+Adapted by Marie Chion, from \code{limmaCompleteTest} of the 
+\code{DAPAR} package by Hélène Borges, Thomas Burger, 
+Quentin Giai-Gianetto and Samuel Wieczorek.
 }

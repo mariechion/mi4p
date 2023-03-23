@@ -3,8 +3,8 @@
 #' @description 
 #' This function checks the validity of the experimental design.
 #' 
-#' This function was included from the \code{\link[DAPAR]{check.design}} 
-#' function in the DAPAR package, since DAPAR is to be removed from 
+#' This function was included from the \code{check.design} 
+#' function in the \code{DAPAR} package, since \code{DAPAR} was to be removed from 
 #' Bioconductor >= 3.15. 
 #' 
 #' @param sTab The data.frame which correspond to the pData function of MSnbase
@@ -12,7 +12,7 @@
 #' @return A boolean
 #' 
 #' @author Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek as 
-#' the authors of \code{\link[DAPAR]{check.design}}.
+#' the authors of \code{check.design} in the \code{DAPAR} package.
 #' 
 #' @examples
 #' \dontrun{

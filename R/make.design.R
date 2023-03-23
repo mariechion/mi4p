@@ -171,7 +171,7 @@ make.design.2=function(sTab){
 #' @return A design matrix
 #' 
 #' @author Thomas Burger, Quentin Giai-Gianetto, Samuel Wieczorek originally in 
-#' the DAPAR package. Included in this package since DAPAR is to be removed from 
+#' the DAPAR package. Included in this package since DAPAR was to be removed from 
 #' Bioconductor >= 3.15. 
 #' 
 #' @examples

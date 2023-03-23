@@ -26,8 +26,9 @@
 #' and correspond to the description of the comparison.
 #' 
 #' @author 
-#' Adapted by Marie Chion, from \code{\link[DAPAR]{limmaCompleteTest}} by 
-#' Hélène Borges, Thomas Burger, Quentin Giai-Gianetto and Samuel Wieczorek.
+#' Adapted by Marie Chion, from \code{limmaCompleteTest} of the 
+#' \code{DAPAR} package by Hélène Borges, Thomas Burger, 
+#' Quentin Giai-Gianetto and Samuel Wieczorek.
 #' 
 #' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting 
 #' for multiple imputation-induced variability for differential analysis in 

@@ -15,8 +15,8 @@ A list
 \description{
 This function checks the validity of the conditions.
 
-This function was included from the \code{\link[DAPAR]{check.conditions}} 
-function in the DAPAR package, since DAPAR is to be removed from 
+This function was included from the \code{check.conditions} 
+function in the \code{DAPAR} package, since \code{DAPAR} was to be removed from 
 Bioconductor >= 3.15.
 }
 \examples{
@@ -28,5 +28,5 @@ check.conditions(Biobase::pData(Exp1_R25_pept)$Condition)
 }
 \author{
 Samuel Wieczorek as the author of 
-\code{\link[DAPAR]{check.conditions}}.
+\code{check.conditions} in the \code{DAPAR} package.
 }
