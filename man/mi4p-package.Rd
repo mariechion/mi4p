@@ -4,35 +4,50 @@
 \name{mi4p-package}
 \alias{mi4p-package}
 \alias{mi4p}
-\title{mi4p: Multiple imputation for proteomics}
+\title{mi4p: Multiple Imputation for Proteomics}
 \description{
-Imputing missing values is common practice in label-free quantitative 
-proteomics. Imputation replaces a missing value by a user-defined one. 
-However, the imputation itself is not optimally considered downstream of the
-imputation process. In particular, imputed datasets are considered as if 
-they had always been complete. The uncertainty due to the imputation is not 
-properly taken into account. Hence, the mi4p package provides a more 
-accurate statistical analysis of multiple-imputed datasets. A rigorous 
-multiple imputation methodology is implemented, leading to a less biased 
-estimation of parameters and their variability thanks to Rubin’s rules. The
-imputation-based peptide’s intensities’ variance estimator is then moderated 
-using Bayesian hierarchical models. This estimator is finally included in 
-moderated t-test statistics to provide differential analyses results.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+A framework for multiple imputation for proteomics is proposed by Marie Chion, Christine Carapito and Frederic Bertrand (2021) \doi{10.1371/journal.pcbi.1010420}. It is dedicated to dealing with multiple imputation for proteomics.
 }
 \references{
 M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple 
 imputation-induced variability for differential analysis in mass 
-spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. 
-\url{https://arxiv.org/abs/2108.07086}.
+spectrometry-based label-free quantitative proteomics}.
+\doi{doi:10.1371/journal.pcbi.1010420}\cr
 
 M. Chion, Ch. Carapito, F. Bertrand. Towards a more accurate differential 
 analysis of multiple imputed proteomics data with mi4limma. Statistical 
-Analysis of Proteomic Data: Methods and Tools, 2022. hal-03442944
-\url{https://hal.archives-ouvertes.fr/hal-03442944}
+Analysis of Proteomic Data: Methods and Tools, 2022.
+\doi{doi:10.1007/978-1-0716-1967-4_7}\cr
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://mariechion.github.io/mi4p/}
+  \item \url{https://github.com/mariechion/mi4p/}
+  \item Report bugs at \url{https://github.com/mariechion/mi4p/issues/}
+}
+
 }
 \author{
-This package has been written by Marie Chion, Christine Carapito and 
-Frederic Bertrand.  
-Maintainer: <frederic.bertrand@utt.fr>
+\strong{Maintainer}: Frederic Bertrand \email{frederic.bertrand@utt.fr} (\href{https://orcid.org/0000-0002-0837-8281}{ORCID})
+
+Authors:
+\itemize{
+  \item Marie Chion \email{mariechion@protonmail.com} (\href{https://orcid.org/0000-0001-8956-8388}{ORCID})
+  \item Christine Carapito \email{ccarapito@unistra.fr} (\href{https://orcid.org/0000-0002-0079-319X}{ORCID})
 }
-\keyword{package}
+
+Other contributors:
+\itemize{
+  \item Gordon Smyth [contributor]
+  \item Davis McCarthy [contributor]
+  \item Hélène Borges [contributor]
+  \item Thomas Burger [contributor]
+  \item Quentin Giai-Gianetto [contributor]
+  \item Samuel Wieczorek [contributor]
+}
+
+}
+\keyword{internal}

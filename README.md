@@ -36,26 +36,26 @@ This website and these examples were created by M. Chion, C. Carapito and F. Ber
 You can install the released version of mi4p from [CRAN](https://CRAN.R-project.org) with:
 
 
-```r
+``` r
 install.packages("mi4p")
 ```
 
 You can install the development version of mi4p from [github](https://github.com) with:
 
 
-```r
+``` r
 devtools::install_github("mariechion/mi4p")
 ```
 
 ## Examples
 
 
-```r
+``` r
 library(mi4p)
 ```
 
 
-```r
+``` r
 set.seed(4619)
 datasim <- protdatasim()
 str(datasim)
@@ -79,12 +79,12 @@ str(datasim)
 
 It is the dataset shipped with package.
 
-```r
+``` r
 save(datasim, file="datasim.RData", compress = "xz")
 ```
 
 
-```r
+``` r
 attr(datasim, "metadata")
 #>    Sample.name Condition Bio.Rep
 #> 1           X1         A       1
@@ -102,7 +102,7 @@ attr(datasim, "metadata")
 
 ## AMPUTATION
 
-```r
+``` r
 MV1pct.NA.data <- MVgen(dataset = datasim[,-1], prop_NA = 0.01)
 MV1pct.NA.data[1:6,]
 #>          X1       X2        X3       X4        X5       X6       X7
@@ -123,23 +123,23 @@ MV1pct.NA.data[1:6,]
 
 ## IMPUTATION
 
-```r
+``` r
 MV1pct.impMLE <- multi.impute(data = MV1pct.NA.data, conditions = attr(datasim,"metadata")$Condition, method = "MLE", parallel = FALSE)
 ```
 
 ## ESTIMATION
 
-```r
+``` r
 print(paste(Sys.time(), "Dataset", 1, "out of", 1))
-#> [1] "2022-05-11 15:27:11 Dataset 1 out of 1"
+#> [1] "2024-09-30 23:18:29.427335 Dataset 1 out of 1"
 MV1pct.impMLE.VarRubin.Mat <- rubin2.all(data = MV1pct.impMLE, metacond = attr(datasim, "metadata")$Condition) 
 ```
 
 ## PROJECTION
 
-```r
+``` r
 print(paste("Dataset", 1, "out of",1, Sys.time()))
-#> [1] "Dataset 1 out of 1 2022-05-11 15:28:42"
+#> [1] "Dataset 1 out of 1 2024-09-30 23:19:46.728503"
 MV1pct.impMLE.VarRubin.S2 <- as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat, function(aaa){
     DesMat = mi4p::make.design(attr(datasim, "metadata"))
     return(max(diag(aaa)%*%t(DesMat)%*%DesMat))
@@ -148,7 +148,7 @@ MV1pct.impMLE.VarRubin.S2 <- as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat, funct
 
 ## MODERATED T-TEST
 
-```r
+``` r
 MV1pct.impMLE.mi4limma.res <- mi4limma(qData = apply(MV1pct.impMLE,1:2,mean), 
                  sTab = attr(datasim, "metadata"), 
                  VarRubin = sqrt(MV1pct.impMLE.VarRubin.S2))
@@ -165,44 +165,43 @@ rapply(MV1pct.impMLE.mi4limma.res,head)
 #>  [1] 0 0 0 0 0 0 0 0 0 0
 
 (simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[11:200]<=0.05
-#>   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-#>  [11] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [21] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [31] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-#>  [41] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [51] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [61] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [71] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-#>  [81] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#>  [91] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [101] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [111]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-#> [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [131] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-#> [141] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [151] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#> [161] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-#> [171] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-#> [181] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+#>  [12] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>  [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>  [34] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>  [45] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+#>  [56] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+#>  [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+#>  [78] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#>  [89] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [100] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [111]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+#> [122] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [133] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+#> [144] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [155] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [166] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [177] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#> [188] FALSE FALSE FALSE
 ```
 
 True positive rate
 
-```r
+``` r
 sum((simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[1:10]<=0.05)/10
 #> [1] 1
 ```
 
 False positive rate
 
-```r
+``` r
 sum((simplify2array(MV1pct.impMLE.mi4limma.res)$P_Value.A_vs_B_pval)[11:200]<=0.05)/190
 #> [1] 0.05789474
 ```
 
 
 
-```r
+``` r
 MV1pct.impMLE.dapar.res <-limmaCompleteTest.mod(qData = apply(MV1pct.impMLE,1:2,mean), sTab = attr(datasim, "metadata"))
 rapply(MV1pct.impMLE.dapar.res,head)
 #>  res.l.logFC.A_vs_B_logFC1  res.l.logFC.A_vs_B_logFC2 
@@ -227,7 +226,7 @@ rapply(MV1pct.impMLE.dapar.res,head)
 
 Simulate a list of 100 datasets.
 
-```r
+``` r
 set.seed(4619)
 norm.200.m100.sd1.vs.m200.sd1.list <- lapply(1:100, protdatasim)
 metadata <- attr(norm.200.m100.sd1.vs.m200.sd1.list[[1]],"metadata")
@@ -235,13 +234,13 @@ metadata <- attr(norm.200.m100.sd1.vs.m200.sd1.list[[1]],"metadata")
 
 It is the list of dataset shipped with package.
 
-```r
+``` r
 save(norm.200.m100.sd1.vs.m200.sd1.list, file="norm.200.m100.sd1.vs.m200.sd1.list.RData", compress = "xz")
 ```
 
 100 datasets with parallel comuting support. Quite long to run even with parallel computing support.
 
-```r
+``` r
 library(foreach)
 doParallel::registerDoParallel(cores=NULL)
 requireNamespace("foreach",quietly = TRUE)
@@ -249,7 +248,7 @@ requireNamespace("foreach",quietly = TRUE)
 
 ## AMPUTATION
 
-```r
+``` r
 MV1pct.NA.data <- foreach::foreach(iforeach =  norm.200.m100.sd1.vs.m200.sd1.list,
                           .errorhandling = 'stop', .verbose = T) %dopar% 
   MVgen(dataset = iforeach[,-1], prop_NA = 0.01)
@@ -257,7 +256,7 @@ MV1pct.NA.data <- foreach::foreach(iforeach =  norm.200.m100.sd1.vs.m200.sd1.lis
 
 ## IMPUTATION
 
-```r
+``` r
 MV1pct.impMLE <- foreach::foreach(iforeach =  MV1pct.NA.data,
                          .errorhandling = 'stop', .verbose = F) %dopar% 
   multi.impute(data = iforeach, conditions = metadata$Condition, 
@@ -266,7 +265,7 @@ MV1pct.impMLE <- foreach::foreach(iforeach =  MV1pct.NA.data,
 
 ## ESTIMATION
 
-```r
+``` r
 MV1pct.impMLE.VarRubin.Mat <- lapply(1:length(MV1pct.impMLE), function(index){
   print(paste(Sys.time(), "Dataset", index, "out of", length(MV1pct.impMLE)))
   rubin2.all(data = MV1pct.impMLE[[index]], metacond = metadata$Condition) 
@@ -275,7 +274,7 @@ MV1pct.impMLE.VarRubin.Mat <- lapply(1:length(MV1pct.impMLE), function(index){
 
 ## PROJECTION
 
-```r
+``` r
 MV1pct.impMLE.VarRubin.S2 <- lapply(1:length(MV1pct.impMLE.VarRubin.Mat), function(id.dataset){
   print(paste("Dataset", id.dataset, "out of",length(MV1pct.impMLE.VarRubin.Mat), Sys.time()))
   as.numeric(lapply(MV1pct.impMLE.VarRubin.Mat[[id.dataset]], function(aaa){
@@ -287,7 +286,7 @@ MV1pct.impMLE.VarRubin.S2 <- lapply(1:length(MV1pct.impMLE.VarRubin.Mat), functi
 
 ## MODERATED T-TEST
 
-```r
+``` r
 MV1pct.impMLE.mi4limma.res <- foreach(iforeach =  1:100,  .errorhandling = 'stop', .verbose = T) %dopar%
   mi4limma(qData = apply(MV1pct.impMLE[[iforeach]],1:2,mean), 
                  sTab = metadata, 
@@ -305,21 +304,15 @@ Complimentary useful tests
 The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Test described in “A statistical framework for protein quantitation in bottom-up MS based proteomics`` (Karpievitch et al. Bioinformatics 2009). For some experimental designs of experiments, this test may be used to look for significant peptides based on their absence/presence. For some designs, it will decrease the precision of out methodology, see the arabidopsis example on github.
 
 
-```r
+``` r
 library(ProteoMM)
-#> 
-#> Attachement du package : 'ProteoMM'
-#> Les objets suivants sont masqués depuis 'package:mi4p':
-#> 
-#>     eigen_pi, g.test
 ProteoMM::g.test(c(TRUE, TRUE, FALSE, FALSE), as.factor(c('grp1', 'grp1', 'grp2', 'grp2')))
 #> 
-#> 	Log likelihood ratio/G test of independence
-#> 	without correction
+#> 	Log likelihood ratio/G test of independence without correction
 #> 
 #> data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))
-#> Log likelihood ratio statistic (G) = 5.5452,
-#> X-squared df = 1, p-value = 0.01853
+#> Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,
+#> p-value = 0.01853
 data("qData")
 data("sTab")
 tableNA.qData <- apply(is.na(qData),1,table,sTab$Condition)
@@ -335,22 +328,22 @@ res.g.test[res.g.test[,2]<0.05,]
 #> 105                     105 0.003925917
 #> 389                     389 0.003925917
 qData[rownames(res.g.test[res.g.test[,2]<0.05,]),]
-#>     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3
-#> 29        23.18826       22.74154       22.94633
-#> 44              NA             NA             NA
-#> 105       26.52709       26.37171       26.63201
-#> 389             NA             NA             NA
-#>     Intensity_D_R1 Intensity_D_R2 Intensity_D_R3
-#> 29              NA             NA             NA
-#> 44        25.83019       25.98796       26.03095
-#> 105             NA             NA             NA
-#> 389       22.20932       21.93693       22.03093
+#>     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3 Intensity_D_R1
+#> 29        23.18826       22.74154       22.94633             NA
+#> 44              NA             NA             NA       25.83019
+#> 105       26.52709       26.37171       26.63201             NA
+#> 389             NA             NA             NA       22.20932
+#>     Intensity_D_R2 Intensity_D_R3
+#> 29              NA             NA
+#> 44        25.98796       26.03095
+#> 105             NA             NA
+#> 389       21.93693       22.03093
 ```
 
 The `eigen_pi` function of the `ProteoMM` Bioconductor package computes the proportion of observations missing completely at random. It is used by the `g.test` function if such an estimate is to be computed using the data
 .
 
-```r
+``` r
 library(ProteoMM)
 data(mm_peptides)
 intsCols = 8:13
@@ -363,5 +356,8 @@ m_logInts = log2(m_logInts)
 my.pi = ProteoMM::eigen_pi(m_logInts, toplot=TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="100%" />
+<div class="figure">
+<img src="man/figures/README-unnamed-chunk-24-1.png" alt="plot of chunk unnamed-chunk-24" width="100%" />
+<p class="caption">plot of chunk unnamed-chunk-24</p>
+</div>
 

@@ -12,7 +12,8 @@ hid.ebayes(
   stdev.coef.lim = c(0.1, 4),
   trend = FALSE,
   robust = FALSE,
-  winsor.tail.p = c(0.05, 0.1)
+  winsor.tail.p = c(0.05, 0.1),
+  legacy = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ hid.ebayes(
 \item{robust}{logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances?}
 
 \item{winsor.tail.p}{numeric vector of length 1 or 2, giving left and right tail proportions of x to Winsorize. Used only when robust=TRUE.}
+
+\item{legacy}{boolean to stick to former way to squeeze variances. Defaults to TRUE.}
 }
 \value{
 eBayes produces an object of class MArrayLM (see MArrayLM-class) containing everything found in \code{fit} plus the following added components:

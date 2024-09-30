@@ -21,7 +21,7 @@
 #' \item{X10}{a numeric vector} 
 #' }
 #' @author M. Chion, Ch. Carapito and F. Bertrand.
-#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. \doi{doi:10.1371/journal.pcbi.1010420}.
 #' @source We simulated the data.
 #' @keywords datasets
 #' @examples
@@ -64,7 +64,7 @@ NULL
 #' \item{...}{...}
 #' }
 #' @author M. Chion, Ch. Carapito and F. Bertrand.
-#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}. arxiv:2108.07086. \url{https://arxiv.org/abs/2108.07086}.
+#' @references M. Chion, Ch. Carapito and F. Bertrand (2021). \emph{Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics}.  \doi{doi:10.1371/journal.pcbi.1010420}.
 #' @source We simulated the data.
 #' @keywords datasets
 #' @examples

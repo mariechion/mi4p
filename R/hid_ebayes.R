@@ -10,6 +10,7 @@
 #' @param trend logical, should an intensity-trend be allowed for the prior variance? Default is that the prior variance is constant.
 #' @param robust logical, should the estimation of df.prior and var.prior be robustified against outlier sample variances?
 #' @param winsor.tail.p numeric vector of length 1 or 2, giving left and right tail proportions of x to Winsorize. Used only when robust=TRUE.
+#' @param legacy boolean to stick to former way to squeeze variances. Defaults to TRUE.
 #'
 #' @return eBayes produces an object of class MArrayLM (see MArrayLM-class) containing everything found in \code{fit} plus the following added components:
 #' \describe{ 
@@ -47,7 +48,7 @@
 #' fit.model <- limma::lmFit(y,design)
 #' hid.ebayes(fit=fit.model,VarRubin.matrix[[1]])
 hid.ebayes<-function (fit, VarRubin, mod=TRUE, proportion = 0.01, stdev.coef.lim = c(0.1, 4), 
-          trend = FALSE, robust = FALSE, winsor.tail.p = c(0.05, 0.1)) 
+          trend = FALSE, robust = FALSE, winsor.tail.p = c(0.05, 0.1), legacy=TRUE) 
 {
   coefficients <- fit$coefficients
   stdev.unscaled <- fit$stdev.unscaled
@@ -70,7 +71,8 @@ hid.ebayes<-function (fit, VarRubin, mod=TRUE, proportion = 0.01, stdev.coef.lim
   }
   if (mod) {
     out <- limma::squeezeVar(sigma^2, df.residual, covariate = covariate, 
-                    robust = robust, winsor.tail.p = winsor.tail.p)
+                    robust = robust, winsor.tail.p = winsor.tail.p, 
+                    legacy = legacy)
     out$s2.prior <- out$var.prior
     out$s2.post <- out$var.post
     out$var.prior <- out$var.post <- NULL

@@ -1,3 +1,7 @@
+# mi4p 1.2
+
+* updated code to fix CRAN notes due to code changes in dependencies
+
 # mi4p 1.1
 
 * updated code to fix CRAN notes
