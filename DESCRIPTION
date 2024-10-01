@@ -18,7 +18,6 @@ Suggests:
     knitr,
     R.rsp,
     markdown,
-    prettydoc,
     rmarkdown,
     DAPAR,
     ProteoMM

@@ -7,9 +7,9 @@ author:
 - Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, frederic.bertrand@utt.fr
 date: "`r Sys.Date()`"
 output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  html_document:
+    theme: united
+    highlight: espresso
 vignette: >
   %\VignetteIndexEntry{Multiple imputation for proteomics}
   %\VignetteEngine{knitr::rmarkdown}
