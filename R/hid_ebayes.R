@@ -70,9 +70,14 @@ hid.ebayes<-function (fit, VarRubin, mod=TRUE, proportion = 0.01, stdev.coef.lim
     covariate <- NULL
   }
   if (mod) {
+    if(packageVersion("limma")>= "3.61.8"){
     out <- limma::squeezeVar(sigma^2, df.residual, covariate = covariate, 
                     robust = robust, winsor.tail.p = winsor.tail.p, 
                     legacy = legacy)
+    } else {
+      out <- limma::squeezeVar(sigma^2, df.residual, covariate = covariate, 
+                               robust = robust, winsor.tail.p = winsor.tail.p)
+    }
     out$s2.prior <- out$var.prior
     out$s2.post <- out$var.post
     out$var.prior <- out$var.post <- NULL

@@ -15,7 +15,7 @@
 "_PACKAGE"
 
 #' 
-#' @importFrom stats lm median pchisq pf pt vcov
+#' @importFrom stats lm median pchisq pf pt vcov rnorm
 #' @importFrom foreach %dopar%
-#' @importFrom stats rnorm
+#' @importFrom utils packageVersion
 NULL
