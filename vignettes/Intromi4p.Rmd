@@ -4,7 +4,7 @@ shorttitle: "mi4p: multiple imputation for proteomics"
 author: 
 - Marie Chion, Université de Strasbourg et CNRS, IRMA, labex IRMIA, LSMBO, IPHC, marie.chion@protonmail.fr
 - Christine Carapito, Université de Strasbourg et CNRS, LSMBO, IPHC, ccarapito@unistra.fr
-- Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, frederic.bertrand@utt.fr
+- Frédéric Bertrand, Université de Strasbourg et CNRS, IRMA, labex IRMIA, Université de technologie de Troyes, LIST3N, frederic.bertrand@lecnam.net
 date: "`r Sys.Date()`"
 output:
   html_document:

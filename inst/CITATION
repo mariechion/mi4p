@@ -5,6 +5,9 @@ titl <- "mi4p: multiple imputation for proteomics"
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
 vers <- paste("R package version", meta$Version)
 auth <- c(person(given="Marie", family="Chion"), person(given="Christine", family="Carapito"), person(given="Frederic", family="Bertrand"))
+doi <- paste0("10.32614/CRAN.package.", meta$Package)
+urldoi <- paste0("https://doi.org/", doi)
+
 
 bibentry(bibtype="Manual",
          title = titl,
@@ -13,9 +16,10 @@ bibentry(bibtype="Manual",
          year         = year,
          note         = vers,
          url          = "",
+         doi = doi,
          textVersion = 
          paste("M. Chion, Ch. Carapito and F. Bertrand (",year ,"). ", 
-               titl, ", ", vers, ".", sep=""
+               titl, ", ", vers, ". doi:", doi, ".", sep=""
                )
 )
 

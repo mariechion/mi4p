@@ -17,7 +17,10 @@ knitr::opts_chunk$set(
 # A multiple imputation framework for proteomics
 ## Marie Chion, Christine Carapito and Frédéric Bertrand
 
+<https://doi.org/10.32614/CRAN.package.mi4p>
+
 <!-- badges: start -->
+[![DOI](https://img.shields.io/badge/doi-10.32614/CRAN.package.mi4p-blue.svg)](https://doi.org/10.32614/CRAN.package.mi4p)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/mariechion/mi4p/workflows/R-CMD-check/badge.svg)](https://github.com/mariechion/mi4p/actions)
@@ -25,7 +28,6 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/mi4p)](https://cran.r-project.org/package=mi4p)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/mi4p)](https://cran.r-project.org/package=mi4p)
 [![GitHub Repo stars](https://img.shields.io/github/stars/mariechion/mi4p?style=social)](https://github.com/mariechion/mi4p)
-<!--[![DOI](https://zenodo.org/badge/18441799.svg)](https://zenodo.org/badge/latestdoi/18441799)-->
 <!-- badges: end -->
 
 This repository contains the R code and package for the _mi4p_ methodology (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand (2021) in *Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics*, [https://arxiv.org/abs/2108.07086](https://arxiv.org/abs/2108.07086). 

@@ -8,7 +8,10 @@
 # A multiple imputation framework for proteomics
 ## Marie Chion, Christine Carapito and Frédéric Bertrand
 
+<https://doi.org/10.32614/CRAN.package.mi4p>
+
 <!-- badges: start -->
+[![DOI](https://img.shields.io/badge/doi-10.32614/CRAN.package.mi4p-blue.svg)](https://doi.org/10.32614/CRAN.package.mi4p)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/mariechion/mi4p/workflows/R-CMD-check/badge.svg)](https://github.com/mariechion/mi4p/actions)
@@ -16,7 +19,6 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/mi4p)](https://cran.r-project.org/package=mi4p)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/mi4p)](https://cran.r-project.org/package=mi4p)
 [![GitHub Repo stars](https://img.shields.io/github/stars/mariechion/mi4p?style=social)](https://github.com/mariechion/mi4p)
-<!--[![DOI](https://zenodo.org/badge/18441799.svg)](https://zenodo.org/badge/latestdoi/18441799)-->
 <!-- badges: end -->
 
 This repository contains the R code and package for the _mi4p_ methodology (Multiple Imputation for Proteomics), proposed by Marie Chion, Christine Carapito and Frédéric Bertrand (2021) in *Accounting for multiple imputation-induced variability for differential analysis in mass spectrometry-based label-free quantitative proteomics*, [https://arxiv.org/abs/2108.07086](https://arxiv.org/abs/2108.07086). 
@@ -306,13 +308,9 @@ The `g.test` function of the`ProteoMM` Bioconductor package, implements the G-Te
 
 ``` r
 library(ProteoMM)
+#> Error in library(ProteoMM): there is no package called 'ProteoMM'
 ProteoMM::g.test(c(TRUE, TRUE, FALSE, FALSE), as.factor(c('grp1', 'grp1', 'grp2', 'grp2')))
-#> 
-#> 	Log likelihood ratio/G test of independence without correction
-#> 
-#> data:  c(TRUE, TRUE, FALSE, FALSE) and as.factor(c("grp1", "grp1", "grp2", "grp2"))
-#> Log likelihood ratio statistic (G) = 5.5452, X-squared df = 1,
-#> p-value = 0.01853
+#> Error in loadNamespace(x): there is no package called 'ProteoMM'
 data("qData")
 data("sTab")
 tableNA.qData <- apply(is.na(qData),1,table,sTab$Condition)
@@ -321,23 +319,11 @@ id.mix <- unlist(lapply(tableNA.qData,function(res) nrow(res)>1))
 res.g.test <- cbind(rownames=as.data.frame(rownames(qData)[id.mix]),
                     p.val=apply(is.na(qData[id.mix,]),1,
                                 function(tab) return(ProteoMM::g.test(x=tab,y=sTab$Condition)$p.value)))
+#> Error in loadNamespace(x): there is no package called 'ProteoMM'
 res.g.test[res.g.test[,2]<0.05,]
-#>     rownames(qData)[id.mix]       p.val
-#> 29                       29 0.003925917
-#> 44                       44 0.003925917
-#> 105                     105 0.003925917
-#> 389                     389 0.003925917
+#> Error: object 'res.g.test' not found
 qData[rownames(res.g.test[res.g.test[,2]<0.05,]),]
-#>     Intensity_C_R1 Intensity_C_R2 Intensity_C_R3 Intensity_D_R1
-#> 29        23.18826       22.74154       22.94633             NA
-#> 44              NA             NA             NA       25.83019
-#> 105       26.52709       26.37171       26.63201             NA
-#> 389             NA             NA             NA       22.20932
-#>     Intensity_D_R2 Intensity_D_R3
-#> 29              NA             NA
-#> 44        25.98796       26.03095
-#> 105             NA             NA
-#> 389       21.93693       22.03093
+#> Error: object 'res.g.test' not found
 ```
 
 The `eigen_pi` function of the `ProteoMM` Bioconductor package computes the proportion of observations missing completely at random. It is used by the `g.test` function if such an estimate is to be computed using the data
@@ -345,6 +331,7 @@ The `eigen_pi` function of the `ProteoMM` Bioconductor package computes the prop
 
 ``` r
 library(ProteoMM)
+#> Error in library(ProteoMM): there is no package called 'ProteoMM'
 data(mm_peptides)
 intsCols = 8:13
 metaCols = 1:7
@@ -354,10 +341,6 @@ m_logInts = m_Ints
 m_logInts[m_Ints==0] = NA
 m_logInts = log2(m_logInts)
 my.pi = ProteoMM::eigen_pi(m_logInts, toplot=TRUE)
+#> Error in loadNamespace(x): there is no package called 'ProteoMM'
 ```
-
-<div class="figure">
-<img src="man/figures/README-unnamed-chunk-24-1.png" alt="plot of chunk unnamed-chunk-24" width="100%" />
-<p class="caption">plot of chunk unnamed-chunk-24</p>
-</div>
 

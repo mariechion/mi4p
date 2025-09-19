@@ -1,3 +1,9 @@
+# mi4p 1.3
+
+* Maintainer email updated
+* Added unit tests
+* Added package doi
+
 # mi4p 1.2
 
 * updated code to fix CRAN notes due to code changes in dependencies

@@ -31,7 +31,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Frederic Bertrand \email{frederic.bertrand@utt.fr} (\href{https://orcid.org/0000-0002-0837-8281}{ORCID})
+\strong{Maintainer}: Frederic Bertrand \email{frederic.bertrand@lecnam.net} (\href{https://orcid.org/0000-0002-0837-8281}{ORCID})
 
 Authors:
 \itemize{
